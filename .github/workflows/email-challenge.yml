@@ -1,0 +1,159 @@
+# FC26 Paper NFT — Email Challenge
+#
+# Phase 1: send verification code to author's email.
+# Triggered when someone opens an issue with [PAPER] in the title.
+#
+# ISSUE FORMAT:
+#   Title: [PAPER] Claim paper NFT
+#   Body:
+#     paper_id: 5
+#     email: user@example.com
+#     recipient: 0x1234...
+#
+# REQUIRED SECRETS:
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, SES_FROM_EMAIL, AWS_REGION
+
+name: Paper NFT Challenge
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  send-challenge:
+    if: contains(github.event.issue.title, '[PAPER]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse issue
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+
+            const paperMatch = body.match(/paper_id:\s*(\d+)/i);
+            if (!paperMatch) {
+              core.setFailed('No paper_id found. Use format: paper_id: 5');
+              return;
+            }
+            const paperId = paperMatch[1];
+
+            const emailMatch = body.match(/email:\s*(\S+@\S+\.\S+)/i);
+            if (!emailMatch) {
+              core.setFailed('No email found. Use format: email: user@example.com');
+              return;
+            }
+            const email = emailMatch[1].toLowerCase();
+
+            const addrMatch = body.match(/recipient:\s*(0x[a-fA-F0-9]{40})/i);
+            if (!addrMatch) {
+              core.setFailed('No recipient address found. Use format: recipient: 0x...');
+              return;
+            }
+            const recipient = addrMatch[1].toLowerCase();
+
+            core.setOutput('paper_id', paperId);
+            core.setOutput('email', email);
+            core.setOutput('recipient', recipient);
+            console.log(`Paper: ${paperId}, Email: ${email}, Recipient: ${recipient}`);
+
+      - name: Generate challenge token
+        id: challenge
+        run: |
+          TOKEN=$(openssl rand -hex 32)
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+          HASH=$(echo -n "$TOKEN" | sha256sum | cut -d' ' -f1)
+          echo "hash=$HASH" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_OUTPUT
+
+      - name: Send verification email
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          FROM="${{ secrets.SES_FROM_EMAIL }}"
+          TO="${{ steps.parse.outputs.email }}"
+          TOKEN="${{ steps.challenge.outputs.token }}"
+          RECIPIENT="${{ steps.parse.outputs.recipient }}"
+          PAPER_ID="${{ steps.parse.outputs.paper_id }}"
+          REPO="${{ github.repository }}"
+          ADDR_SHORT="${RECIPIENT:0:6}...${RECIPIENT: -4}"
+
+          RAW_MSG="From: ${FROM}
+          To: ${TO}
+          Subject: FC'26 Paper #${PAPER_ID} — Verify your author email
+          MIME-Version: 1.0
+          Content-Type: text/html; charset=UTF-8
+
+          <div style=\"max-width:480px;margin:0 auto;font-family:-apple-system,sans-serif;padding:20px\">
+            <h2 style=\"margin-top:0\">FC'26 Paper Author Verification</h2>
+            <p>A request was made to verify <strong>${TO}</strong> as an author of <strong>Paper #${PAPER_ID}</strong>, minting an NFT to:</p>
+            <p style=\"font-family:monospace;background:#f5f5f5;padding:10px;border-radius:4px;word-break:break-all\">${RECIPIENT}</p>
+            <p>If you authorized this, copy the code below and share it with whoever is helping you claim your NFT.</p>
+            <p style=\"color:#b08800;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px;font-size:13px\">Do not share this code if you did not request this verification.</p>
+            <p style=\"font-family:monospace;background:#f0f0f0;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;word-break:break-all;text-align:center;letter-spacing:1px\">${TOKEN}</p>
+            <p style=\"color:#666;font-size:13px\">This code expires in 1 hour.</p>
+            <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\">
+            <p style=\"color:#999;font-size:11px\">Sent from <a href=\"https://github.com/${REPO}\">${REPO}</a> via GitHub Actions</p>
+          </div>"
+
+          B64_MSG=$(echo "$RAW_MSG" | base64 -w 0)
+          aws ses send-raw-email \
+            --raw-message "Data=$B64_MSG" \
+            --region "${{ secrets.AWS_REGION }}"
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const hash = '${{ steps.challenge.outputs.hash }}';
+            const timestamp = '${{ steps.challenge.outputs.timestamp }}';
+            const email = '${{ steps.parse.outputs.email }}';
+            const recipient = '${{ steps.parse.outputs.recipient }}';
+            const paperId = '${{ steps.parse.outputs.paper_id }}';
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: [
+                `## 📧 Verification email sent!`,
+                ``,
+                `An email was sent to verify authorship of **Paper #${paperId}**. The recipient should share the verification code, then comment it on this issue.`,
+                ``,
+                `<details>`,
+                `<summary>Verification metadata (for auditors)</summary>`,
+                ``,
+                `- Challenge hash: \`${hash}\``,
+                `- Paper ID: \`${paperId}\``,
+                `- Email: \`${email}\``,
+                `- Recipient: \`${recipient}\``,
+                `- Timestamp: \`${timestamp}\``,
+                `- Run ID: \`${context.runId}\``,
+                `- Expires: 1 hour`,
+                `</details>`
+              ].join('\n')
+            });
+
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['paper-pending']
+            });
+
+      - name: Comment failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## ❌ Challenge Failed\n\nCould not send verification email. Check issue format:\n\`\`\`\npaper_id: 5\nemail: user@example.com\nrecipient: 0x1234...\n\`\`\``
+            });

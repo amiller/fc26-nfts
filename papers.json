@@ -1,0 +1,578 @@
+[
+  {
+    "id": 5,
+    "title": "Transfer algorithm for on-chain one-hop routing",
+    "authors": "Ruichao Jiang, Zirong Li, Long Wen",
+    "emails": [
+      "attens.li@derivation.info",
+      "long.wen@derivation.info",
+      "long1wen@polyu.edu.hk",
+      "ruichao.jiang@derivation.info"
+    ],
+    "session": {
+      "number": 1,
+      "title": "DeFi & AMMs"
+    }
+  },
+  {
+    "id": 13,
+    "title": "Majorum: Ebb-and-Flow Consensus with Dynamic Quorums",
+    "authors": "Francesco D'Amato, Roberto Saltini, Thanh-Hai Tran, Yann Vonlanthen, Luca Zanolini",
+    "emails": [
+      "francesco.damato@ethereum.org",
+      "luca.zanolini@ethereum.org",
+      "roberto.saltini@ethereum.org",
+      "thanhhai1302@gmail.com",
+      "yann.vonlanthen@ethereum.org"
+    ],
+    "session": {
+      "number": 11,
+      "title": "Consensus — Fast Finality"
+    }
+  },
+  {
+    "id": 14,
+    "title": "Incentive-Compatible Recovery from Manipulated Signals",
+    "authors": "Jason Milionis, Jens Ernstberger, Joseph Bonneau, Scott Duke Kominers, Tim Roughgarden",
+    "emails": [],
+    "session": {
+      "number": 4,
+      "title": "Incentives & Decentralization"
+    }
+  },
+  {
+    "id": 17,
+    "title": "Incentivizing Geographic Diversity for Decentralized Systems",
+    "authors": "Marc Roeschlin, Evangelos Markakis, Raghav Bhaskar, Aggelos Kiayias",
+    "emails": [
+      "firstname.lastname@iohk.io"
+    ],
+    "session": {
+      "number": 4,
+      "title": "Incentives & Decentralization"
+    }
+  },
+  {
+    "id": 26,
+    "title": "Chain-in-the-Box: Large-scale Blockchain Prototyping on a Single Machine",
+    "authors": "Suyan Qu, Remzi Arpaci-Dusseau, Andrea Arpaci-Dusseau",
+    "emails": [
+      "dusseau@cs.wisc.edu",
+      "remzi@cs.wisc.edu",
+      "suyan@cs.wisc.edu"
+    ],
+    "session": {
+      "number": 2,
+      "title": "Consensus & Smart Contracts"
+    }
+  },
+  {
+    "id": 30,
+    "title": "On Cryptographic Cheap Talk with Smart Contracts",
+    "authors": "Pavel Hubacek, Michelle Yeo",
+    "emails": [],
+    "session": {
+      "number": 2,
+      "title": "Consensus & Smart Contracts"
+    }
+  },
+  {
+    "id": 37,
+    "title": "On the (Un)biasability of Existing Verifiable Random Functions",
+    "authors": "Davide Carnemolla, Dario Catalano, Valentina Frasca, Emanuele Giunta",
+    "emails": [
+      "dario.catalano@unict.it",
+      "davide.carnemolla@phd.unict.it",
+      "emanuele.giunta@inf.ethz.ch",
+      "valentina.frasca@phd.unict.it"
+    ],
+    "session": {
+      "number": 3,
+      "title": "PoS & Block Production"
+    }
+  },
+  {
+    "id": 41,
+    "title": "Secure MSM Outsourcing Computation for Zero-knowledge Proof Generation",
+    "authors": "Wujie Xiong, Arefeh Rahaei, Sangwon Shin, Xinxin Fan, Taeweon Suh, Veronika Kuchta, Francesco Sica, Weidong Shi, Lei Xu",
+    "emails": [
+      "arahaei@kent.edu",
+      "fan.hecc@gmail.com",
+      "husask11@korea.ac.kr",
+      "lxu12@kent.edu",
+      "sicaf@fau.edu",
+      "suhtw@korea.ac.kr",
+      "vkuchta@fau.edu",
+      "wshi3@central.uh.edu",
+      "wxiong1@kent.edu"
+    ],
+    "session": {
+      "number": 5,
+      "title": "Zero-Knowledge Proofs"
+    }
+  },
+  {
+    "id": 55,
+    "title": "Oops!... I Did It Again. I Reused my Nonce.",
+    "authors": "Vincent Jacquot, Benoit Donnet",
+    "emails": [],
+    "session": {
+      "number": 8,
+      "title": "Nonce and Key Reuse"
+    }
+  },
+  {
+    "id": 58,
+    "title": "Collusion-Safe Proxy Re-Encryption",
+    "authors": "Haotian Yin, Jie Zhang, Wanxin Li, Yuji Dong, Eng Gee Lim, Dominik Wojtczak",
+    "emails": [
+      "d.wojtczak@liverpool.ac.uk",
+      "enggee.lim@xjtlu.edu.cn",
+      "haotian.yin23@student.xjtlu.edu.cn",
+      "jie.zhang01@xjtlu.edu.cn",
+      "wanxin.li@xjtlu.edu.cn",
+      "yuji.dong02@xjtlu.edu.cn"
+    ],
+    "session": {
+      "number": 6,
+      "title": "Threshold & Encryption"
+    }
+  },
+  {
+    "id": 86,
+    "title": "Making the Memorable Unguessable",
+    "authors": "Hannah Ammah Serwaah Adjei, Miguel Vargas Martin",
+    "emails": [
+      "hannah.adjei@ontariotechu.net",
+      "miguel.martin@ontariotechu.ca"
+    ],
+    "session": {
+      "number": 10,
+      "title": "Privacy & Trust"
+    }
+  },
+  {
+    "id": 88,
+    "title": "Plaintext-Scale Fair Data Exchange",
+    "authors": "Majid Khabbazian",
+    "emails": [],
+    "session": {
+      "number": 5,
+      "title": "Zero-Knowledge Proofs"
+    }
+  },
+  {
+    "id": 95,
+    "title": "Bribers, Bribers on The Chain",
+    "authors": "Bence Soóki-Tóth, István András Seres, Kamilla Kara, Ábel Nagy, Balázs Pejó, Gergely Biczók",
+    "emails": [],
+    "session": {
+      "number": 2,
+      "title": "Consensus & Smart Contracts"
+    }
+  },
+  {
+    "id": 104,
+    "title": "Minimizing the Use of the Honest Majority in YOSO MPC",
+    "authors": "Rishabh Bhadauria, James Hsin-yu Chiang, Divya Ravi, Jure Sternad, Sophia Yakoubov",
+    "emails": [],
+    "session": {
+      "number": 2,
+      "title": "Consensus & Smart Contracts"
+    }
+  },
+  {
+    "id": 105,
+    "title": "V3rified: Revelation vs Non-Revelation Mechanisms",
+    "authors": "Athina Terzoglou, Tiantian Gong, Aniket Kate, Alexandros Psomas",
+    "emails": [
+      "a.kate@supra.com",
+      "aniket@purdue.edu",
+      "apsomas@purdue.edu",
+      "aterzogl@purdue.edu",
+      "hildawithin@gmail.com"
+    ],
+    "session": {
+      "number": 4,
+      "title": "Incentives & Decentralization"
+    }
+  },
+  {
+    "id": 108,
+    "title": "Compliance as a Trust Metric",
+    "authors": "Wenbo Wu, George Konstantinidis",
+    "emails": [
+      "g.konstantinidis@soton.ac.uk",
+      "wenbo.wu@soton.ac.uk"
+    ],
+    "session": {
+      "number": 10,
+      "title": "Privacy & Trust"
+    }
+  },
+  {
+    "id": 112,
+    "title": "Kite: How to Delegate Voting Power Privately",
+    "authors": "Kamilla Nazirkhanova, Vrushank Gunjur, X. Pilli Cruz-De Jesus, Dan Boneh",
+    "emails": [
+      "dabo@stanford.edu",
+      "nazirk@stanford.edu",
+      "pilli@stanford.edu",
+      "vrushank@stanford.edu"
+    ],
+    "session": {
+      "number": 10,
+      "title": "Privacy & Trust"
+    }
+  },
+  {
+    "id": 113,
+    "title": "Delegated Fair Exchange via Threshold Wallets",
+    "authors": "Jay Taylor, Paul Gerhart, Sri AravindaKrishnan Thyagarajan",
+    "emails": [],
+    "session": {
+      "number": 6,
+      "title": "Threshold & Encryption"
+    }
+  },
+  {
+    "id": 117,
+    "title": "Where Does MEV Really Come From?",
+    "authors": "Bence Ladóczki, Miklós Rásonyi, János Tapolcai",
+    "emails": [
+      "ladoczki.bence@vik.bme.hu",
+      "rasonyi.miklos@renyi.hu",
+      "tapolcai@tmit.bme.hu"
+    ],
+    "session": {
+      "number": 1,
+      "title": "DeFi & AMMs"
+    }
+  },
+  {
+    "id": 123,
+    "title": "On Stabilizing the Staking Rate",
+    "authors": "Carlo Brunetta, Amit Chaudhary, Stefano Galatolo, Massimiliano Sala",
+    "emails": [
+      "amit.chaudhary.3@warwick.ac.uk",
+      "brunocarletta@gmail.com",
+      "massimiliano.sala@unitn.it",
+      "stefano.galatolo@unipi.it"
+    ],
+    "session": {
+      "number": 3,
+      "title": "PoS & Block Production"
+    }
+  },
+  {
+    "id": 128,
+    "title": "Reuse of Public Keys Across UTXO and Account-Based Cryptocurrencies",
+    "authors": "Rainer Stütz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
+    "emails": [
+      "aljosha.judmayer@univie.ac.at",
+      "haslhofer@csh.ac.at",
+      "melitta.dragaschnig@ait.ac.at",
+      "nstifter@sba-research.org",
+      "stuetz@csh.ac.at"
+    ],
+    "session": {
+      "number": 8,
+      "title": "Nonce and Key Reuse"
+    }
+  },
+  {
+    "id": 137,
+    "title": "A Theoretical Approach to Stablecoin Design via Price Windows",
+    "authors": "Katherine Molinet, Aris Filos-Ratsikas",
+    "emails": [],
+    "session": {
+      "number": 1,
+      "title": "DeFi & AMMs"
+    }
+  },
+  {
+    "id": 141,
+    "title": "Rationally Analyzing Shelby",
+    "authors": "Michael Crystal, Guy Goren, Scott Duke Kominers",
+    "emails": [],
+    "session": {
+      "number": 4,
+      "title": "Incentives & Decentralization"
+    }
+  },
+  {
+    "id": 146,
+    "title": "SoK: Lookup Table Arguments",
+    "authors": "Hossein Hafezi, Gaspard Anthoine, Matteo Campanelli, Dario Fiore",
+    "emails": [],
+    "session": {
+      "number": 5,
+      "title": "Zero-Knowledge Proofs"
+    }
+  },
+  {
+    "id": 147,
+    "title": "Efficient Privacy-Preserving Blueprints for Threshold Comparison",
+    "authors": "Pratyush Ranjan Tiwari, Harry Eldridge, Matthew Green",
+    "emails": [
+      "hme@cs.jhu.edu",
+      "mgreen@cs.jhu.edu",
+      "pratyush@eternis.ai"
+    ],
+    "session": {
+      "number": 10,
+      "title": "Privacy & Trust"
+    }
+  },
+  {
+    "id": 156,
+    "title": "Adaptively Secure Threshold ElGamal Decryption from DDH",
+    "authors": "Sourav Das, Ling Ren, Ziling Yang",
+    "emails": [
+      "renling@illinois.edu",
+      "souravdas1547@gmail.com",
+      "zilingy2@illinois.edu"
+    ],
+    "session": {
+      "number": 6,
+      "title": "Threshold & Encryption"
+    }
+  },
+  {
+    "id": 166,
+    "title": "AI Agent Smart Contract Exploit Generation",
+    "authors": "Arthur Gervais, Liyi Zhou",
+    "emails": [],
+    "session": {
+      "number": 9,
+      "title": "AI and ML Security"
+    }
+  },
+  {
+    "id": 171,
+    "title": "Minimmit: Fast Finality with Even Faster Blocks",
+    "authors": "Brendan Kobayashi Chou, Andrew Lewis-Pye, Patrick O'Grady",
+    "emails": [],
+    "session": {
+      "number": 11,
+      "title": "Consensus — Fast Finality"
+    }
+  },
+  {
+    "id": 179,
+    "title": "The Free Option Problem of ePBS",
+    "authors": "Bruno Mazorra, Burak Oz, Christoph Schlegel, Fei Wu",
+    "emails": [],
+    "session": {
+      "number": 3,
+      "title": "PoS & Block Production"
+    }
+  },
+  {
+    "id": 186,
+    "title": "Low-Latency Dynamically Available Total Order Broadcast",
+    "authors": "Sravya Yandamuri, Nibesh Shrestha, Luca Zanolini, Kartik Nayak",
+    "emails": [
+      "kartik@cs.duke.edu",
+      "luca.zanolini@ethereum.org",
+      "nibeshrestha2@gmail.com",
+      "syandamuri31@gmail.com"
+    ],
+    "session": {
+      "number": 11,
+      "title": "Consensus — Fast Finality"
+    }
+  },
+  {
+    "id": 187,
+    "title": "L for the Price of One",
+    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hernán Dario Vanegas Madrigal",
+    "emails": [
+      "daniel.escudero@protonmail.com",
+      "hernan@hashcloak.com",
+      "yash@ykondi.net",
+      "yfsong@mail.tsinghua.edu.cn"
+    ],
+    "session": {
+      "number": 6,
+      "title": "Threshold & Encryption"
+    }
+  },
+  {
+    "id": 190,
+    "title": "Post-Quantum Readiness in EdDSA Chains",
+    "authors": "Foteini Baldimtsi, Konstantinos Chalkias, Arnab Roy, Mahdi Sedaghat",
+    "emails": [
+      "arnab@mystenlabs.com",
+      "foteini@mystenlabs.com",
+      "kostas@mystenlabs.com",
+      "ssedagha@esat.kuleuven.be"
+    ],
+    "session": {
+      "number": 7,
+      "title": "Post-Quantum Cryptography"
+    }
+  },
+  {
+    "id": 197,
+    "title": "Latency Advantages in Common-Value Auctions",
+    "authors": "Ciamac C. Moallemi, Mallesh M. Pai, Dan Robinson",
+    "emails": [],
+    "session": {
+      "number": 1,
+      "title": "DeFi & AMMs"
+    }
+  },
+  {
+    "id": 209,
+    "title": "Real AI Agents with Fake Memories",
+    "authors": "Atharv Singh Patlan, Peiyao Sheng, S. Ashwin Hebbar, Prateek Mittal, Pramod Viswanath",
+    "emails": [
+      "atharvsp@princeton.edu",
+      "hebbar@princeton.edu",
+      "peiyao@sentient.xyz",
+      "pmittal@princeton.edu",
+      "pramodv@princeton.edu"
+    ],
+    "session": {
+      "number": 9,
+      "title": "AI and ML Security"
+    }
+  },
+  {
+    "id": 212,
+    "title": "Does Your Blockchain Need Multidimensional Transaction Fees",
+    "authors": "Nir Lavee, Noam Nisan, Mallesh M. Pai, Max Resnick",
+    "emails": [],
+    "session": {
+      "number": 4,
+      "title": "Incentives & Decentralization"
+    }
+  },
+  {
+    "id": 216,
+    "title": "A Trilemma in AMM Mechanism Design",
+    "authors": "Yuhao Li, Elaine Shi, Mengqian Zhang",
+    "emails": [
+      "elaineshi@cmu.edu",
+      "mengqianzhang@cmu.edu",
+      "yuhaoli@cs.columbia.edu"
+    ],
+    "session": {
+      "number": 1,
+      "title": "DeFi & AMMs"
+    }
+  },
+  {
+    "id": 220,
+    "title": "Routing Attacks in Ethereum PoS: A Systematic Exploration",
+    "authors": "Constantine Doumanidis, Maria Apostolaki",
+    "emails": [],
+    "session": {
+      "number": 3,
+      "title": "PoS & Block Production"
+    }
+  },
+  {
+    "id": 223,
+    "title": "Revisiting Post-quantum Robustly Reusable Fuzzy Extractors",
+    "authors": "Somnath Panja, Reihaneh Safavi-Naini",
+    "emails": [],
+    "session": {
+      "number": 7,
+      "title": "Post-Quantum Cryptography"
+    }
+  },
+  {
+    "id": 224,
+    "title": "STAR: Stylized and Transferable Adversarial Robustness",
+    "authors": "Qing Luo, Yili Wang, Zhi Chen, Xiangwen Xiao, Cheng Zeng, Xiaoyi Zhou",
+    "emails": [],
+    "session": {
+      "number": 9,
+      "title": "AI and ML Security"
+    }
+  },
+  {
+    "id": 229,
+    "title": "Efficient Byzantine Agreement in the Presence of Omission Faults",
+    "authors": "Simon Holmgaard Kamp, Julian Loss, Kartik Nayak, Kecheng Shi",
+    "emails": [],
+    "session": {
+      "number": 11,
+      "title": "Consensus — Fast Finality"
+    }
+  },
+  {
+    "id": 231,
+    "title": "Beyond Winner-Take-All Procurement Auctions",
+    "authors": "Pranav Garimidi, Michael Neuder, Tim Roughgarden",
+    "emails": [
+      "michael.neuder@princeton.edu",
+      "pgarimidi@a16z.com",
+      "tim.roughgarden@gmail.com"
+    ],
+    "session": {
+      "number": 3,
+      "title": "PoS & Block Production"
+    }
+  },
+  {
+    "id": 239,
+    "title": "Efficient Partially Blind Signatures from Isogenies",
+    "authors": "Dung Hoang Duong, Chunpeng Ge, Xuan Thanh Khuc, Willy Susilo",
+    "emails": [
+      "chunpeng.ge@sdu.edu.cn",
+      "hduong@uow.edu.au",
+      "wsusilo@uow.edu.au",
+      "xtkhuc@uow.edu.au"
+    ],
+    "session": {
+      "number": 7,
+      "title": "Post-Quantum Cryptography"
+    }
+  },
+  {
+    "id": 240,
+    "title": "The Last Challenge Attack",
+    "authors": "Oana Ciobotaru, Maxim Peter, Vesselin Velichkov",
+    "emails": [],
+    "session": {
+      "number": 5,
+      "title": "Zero-Knowledge Proofs"
+    }
+  },
+  {
+    "id": 252,
+    "title": "SoK: Approximate Agreement",
+    "authors": "Diana Ghinea, Chen-Da Liu-Zhang",
+    "emails": [
+      "chen-da.liuzhang@hslu.ch",
+      "diana.ghinea@hslu.ch"
+    ],
+    "session": {
+      "number": 2,
+      "title": "Consensus & Smart Contracts"
+    }
+  },
+  {
+    "id": 253,
+    "title": "LLMs as verification oracles for Solidity",
+    "authors": "Massimo Bartoletti, Livio Pompianu, Enrico Lipparini",
+    "emails": [],
+    "session": {
+      "number": 9,
+      "title": "AI and ML Security"
+    }
+  },
+  {
+    "id": 258,
+    "title": "Updatable Public-Key Encryption from Class Groups",
+    "authors": "Harish Karthikeyan, Antigoni Polychroniadou",
+    "emails": [],
+    "session": {
+      "number": 6,
+      "title": "Threshold & Encryption"
+    }
+  }
+]

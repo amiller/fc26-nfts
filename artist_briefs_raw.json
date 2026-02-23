@@ -1,0 +1,324 @@
+[
+  {
+    "id": 5,
+    "title": "Transfer algorithm for on-chain one-hop routing",
+    "authors": "Ruichao Jiang, Zirong Li, Long Wen",
+    "session": "DeFi & AMMs",
+    "abstract": "We propose a routing algorithm that finds the optimal onehop swapping between two tokens. The gas consumption is optimized so that it can be run fully on-chain and supports large query amount. Our algorithm is adopted by the Monday Trade protocol.  Topics"
+  },
+  {
+    "id": 13,
+    "title": "Majorum: Ebb-and-Flow Consensus with Dynamic Quorums",
+    "authors": "Francesco D'Amato, Roberto Saltini, Thanh-Hai Tran, Yann Vonlanthen, Luca Zanolini",
+    "session": "Consensus — Fast Finality",
+    "abstract": "Dynamic availability refers to a consensus protocol’s ability to tolerate participants going offline and later rejoining without sacrificing liveness. A well-known limitation, however, is that dynamically-available protocols cannot withstand network partitions, which restricts their practical deployment. Ebb-and-flow protocols [SP21] overcome this limitation by combining a dynamically-available protocol with a partially synchronous consensus protocol that guarantees safety during partitions or periods of asynchrony.  In this work, we present Majorum, the first ebb-and-flow construction built o"
+  },
+  {
+    "id": 14,
+    "title": "Incentive-Compatible Recovery from Manipulated Signals",
+    "authors": "Jason Milionis, Jens Ernstberger, Joseph Bonneau, Scott Duke Kominers, Tim Roughgarden",
+    "session": "Incentives & Decentralization",
+    "abstract": "We introduce the first formal model capturing the elicitation of unverifiable information from a party (the \"source\") with implicit signals derived by other players (the \"observers\"). Our model is motivated in part by applications in decentralized physical infrastructure networks (a.k.a. \"DePIN\"), an emerging application domain in which physical services (e.g., sensor information, bandwidth, or energy) are provided at least in part by untrusted and self-interested parties. A key challenge in these signal network applications is verifying the level of service that was actually provided by netwo"
+  },
+  {
+    "id": 17,
+    "title": "Incentivizing Geographic Diversity for Decentralized Systems",
+    "authors": "Marc Roeschlin, Evangelos Markakis, Raghav Bhaskar, Aggelos Kiayias",
+    "session": "Incentives & Decentralization",
+    "abstract": "Permissionless Decentralized networks, such as blockchains, are typified by self-determined participation. Unfortunately, this has resulted in lack of geographic diversity in several blockchains due to benefits emanating from network proximity between nodes and the higher availability of computing infrastructure in certain areas. Lack of diversity in the resulting network can make it susceptible to geopolitical events, blockchain or cryptocurrency-adverse law-making, and natural disasters. While there exists a growing body of work in verifiable localization in distributed systems, very little "
+  },
+  {
+    "id": 26,
+    "title": "Chain-in-the-Box: Large-scale Blockchain Prototyping on a Single Machine",
+    "authors": "Suyan Qu, Remzi Arpaci-Dusseau, Andrea Arpaci-Dusseau",
+    "session": "Consensus & Smart Contracts",
+    "abstract": "We present Chain-in-the-Box (CBox), an emulation-based prototyping and evaluation framework for blockchain systems. CBox modularizes blockchain systems using a staged event-driven model to facilitate prototyping and performance analysis. It enables large-scale testing on a single machine through various emulation techniques. We im- plemented four blockchain systems in CBox: Bitcoin, Diem, Aptos, and Avalanche. Our evaluation demonstrates that CBox can reliably emulate a reasonably large cluster on a 16-core machine. Finally, using CBox, we conduct a series of case studies that illustrate a fai"
+  },
+  {
+    "id": 30,
+    "title": "On Cryptographic Cheap Talk with Smart Contracts",
+    "authors": "Pavel Hubacek, Michelle Yeo",
+    "session": "Consensus & Smart Contracts",
+    "abstract": "In this work, we revisit cryptographic cheap talk, i.e., preplay protocols for implementing correlated strategies in strategic games, and study its power in a new setting where we allow the players to additionally interact with smart contracts. As our main result, we present a protocol that uses a smart contract as a correlation device to publicly sample and publish an action profile from any distribution over the set of Pareto optimal action profiles. We show that players are not only incentivised to follow this public advice, but are also incentivised not to renegotiate to any other strategy"
+  },
+  {
+    "id": 37,
+    "title": "On the (Un)biasability of Existing Verifiable Random Functions",
+    "authors": "Davide Carnemolla, Dario Catalano, Valentina Frasca, Emanuele Giunta",
+    "session": "PoS & Block Production",
+    "abstract": "Verifiable Random Functions (VRFs) play a fundamental role in modern blockchain designs because of their applications in leader election protocols. In such contexts, however, the original definition by Micali, Rabin and Vadhan (FOCS 99), falls short at guaranteeing fairness when keys are sampled maliciously.  The elegant notion of unbiasable VRF, recently proposed by Giunta and Stewart (Eurocrypt 24), addresses these concerns while remaining simple to state and easy to realize, at least in the random oracle model. Achieving unbiasability in the standard model is a different story, though: all "
+  },
+  {
+    "id": 41,
+    "title": "Secure MSM Outsourcing Computation for Zero-knowledge Proof Generation",
+    "authors": "Wujie Xiong, Arefeh Rahaei, Sangwon Shin, Xinxin Fan, Taeweon Suh, Veronika Kuchta, Francesco Sica, Weidong Shi, Lei Xu",
+    "session": "Zero-Knowledge Proofs",
+    "abstract": "Zero-knowledge proof (ZKP) schemes enable a prover to convince a verifier of the validity of a statement without revealing the underlying secret, and have found extensive applications in secure communications, privacy-preserving transactions, blockchain technologies, and other domains. However, the computational cost of proof generation remains a major obstacle to practical deployment. While various acceleration techniques have been proposed, they often rely on specialized hardware that may not be locally available. A promising yet underexplored alternative is to offload computation to a more "
+  },
+  {
+    "id": 55,
+    "title": "Oops!... I Did It Again. I Reused my Nonce.",
+    "authors": "Vincent Jacquot, Benoit Donnet",
+    "session": "Nonce and Key Reuse",
+    "abstract": "The Elliptic Curve Digital Signature Algorithm (ECDSA) is widely used by cryptocurrencies, including Bitcoin and Ethereum, to authenticate transactions through signature. Signing with ECDSA relies, among other things, on the private key and a nonce, a number that must be used only once and randomly regenerated between each signature. This is particularly important as it has been demonstrated that reusing the nonce between signatures allows attackers to recover private keys and, ultimately, steal funds.  In this paper, we present a large-scale analysis of ECDSA signatures across several blockch"
+  },
+  {
+    "id": 58,
+    "title": "Collusion-Safe Proxy Re-Encryption",
+    "authors": "Haotian Yin, Jie Zhang, Wanxin Li, Yuji Dong, Eng Gee Lim, Dominik Wojtczak",
+    "session": "Threshold & Encryption",
+    "abstract": "Proxy re-encryption is a cryptographic scheme that allows a delegator (user $i$) to delegate its decryption right to a delegatee (user $j$) via a proxy. A critical security concern is the security against collusion between the proxy and the delegatee. In this case, the adversary obtains the secret key of the delegatee, $\\mathsf{sk}_j$, and the re-encryption key, $\\mathsf{rk}_{i\\to j}$. The master secret security is first formalised by Ateniese et al. (NDSS 2005) to capture the secrecy of $i$'s secret key during collusion. This notion was further formalised by Zhou et al. (ASIACRYPT 2023) as th"
+  },
+  {
+    "id": 86,
+    "title": "Making the Memorable Unguessable",
+    "authors": "Hannah Ammah Serwaah Adjei, Miguel Vargas Martin",
+    "session": "Privacy & Trust",
+    "abstract": "We treat personally identifiable information (PII) as a controlled security primitive for generating passwords and honeywords that remain memorable yet resist targeted guessing. Our generator composes three random 4-grams from a user’s PII string (12 characters) and inserts one random digit and one random special character at random positions. This construction deliberately breaks word boundaries (non-semantic), preserving usability while frustrating semantics-driven guessing. To calibrate an attacker, we benchmark a compact LLM-based segmenter against a top-tier system for hashtag segmentatio"
+  },
+  {
+    "id": 88,
+    "title": "Plaintext-Scale Fair Data Exchange",
+    "authors": "Majid Khabbazian",
+    "session": "Zero-Knowledge Proofs",
+    "abstract": "The Fair Data Exchange (FDE) protocol (CCS'24) achieves atomic, pay-per-file exchange with a constant on-chain footprint, but existing implementations do not scale: proof verification, for instance, can take hours even for files of only tens of megabytes. In this work, we present two FDE implementations: VECK+ and VECK*. VECK+ reduces client-side verification to O(λ)--independent of file size--where λ is the security parameter. Concretely, VECK+ brings verification time to ≈ 1 s on a commodity desktop for any file size. VECK+ also significantly reduces proof generation time by limiting expensi"
+  },
+  {
+    "id": 95,
+    "title": "Bribers, Bribers on The Chain",
+    "authors": "Bence Soóki-Tóth, István András Seres, Kamilla Kara, Ábel Nagy, Balázs Pejó, Gergely Biczók",
+    "session": "Consensus & Smart Contracts",
+    "abstract": "The long-term success of cryptocurrencies largely depends on the incentive compatibility provided to the validators. Bribery attacks, facilitated trustlessly via smart contracts, threaten this foundation. This work introduces, implements, and evaluates three novel and efficient bribery contracts targeting Ethereum validators. The first bribery contract enables a briber to fork the blockchain by buying votes on their proposed blocks. The second contract incentivizes validators to voluntarily exit the consensus protocol, thus increasing the adversary's relative staking power. The third contract "
+  },
+  {
+    "id": 104,
+    "title": "Minimizing the Use of the Honest Majority in YOSO MPC",
+    "authors": "Rishabh Bhadauria, James Hsin-yu Chiang, Divya Ravi, Jure Sternad, Sophia Yakoubov",
+    "session": "Consensus & Smart Contracts",
+    "abstract": "Cleve (STOC 86) shows that an honest majority is necessary for MPC with guaranteed output delivery. In this paper, we show that while an honest majority is indeed necessary, its involvement can be minimal. We demonstrate an MPC protocol with guaranteed output delivery, the majority of which is executed by a sequence of committees with dishonest majority; we leverage one committee with an honest majority, each member of which does work independent of the circuit size. Our protocol has the desirable property that every participant speaks only once (YOSO, Crypto 2021).  As a building block of ind"
+  },
+  {
+    "id": 105,
+    "title": "V3rified: Revelation vs Non-Revelation Mechanisms",
+    "authors": "Athina Terzoglou, Tiantian Gong, Aniket Kate, Alexandros Psomas",
+    "session": "Incentives & Decentralization",
+    "abstract": "In the era of Web3, decentralized technologies have emerged as the cornerstone of a new digital paradigm. Backed by a decentralized blockchain architecture, the Web3 space aims to democratize all aspects of the web. From data-sharing to learning models, outsourcing computation is an established, prevalent practice. Verifiable computation makes this practice trustworthy as clients/users can now efficiently validate the integrity of a computation. As verifiable computation gets considered for applications in the Web3 space, decentralization is an important requirement that guarantees system reli"
+  },
+  {
+    "id": 108,
+    "title": "Compliance as a Trust Metric",
+    "authors": "Wenbo Wu, George Konstantinidis",
+    "session": "Privacy & Trust",
+    "abstract": "Trust and Reputation Management Systems (TRMSs) are critical for the modern web, yet their reliance on subjective user ratings or narrow Quality of Service (QoS) metrics lacks objective grounding. Concurrently, while regulatory frameworks like GDPR and HIPAA provide objective behavioral standards, automated compliance auditing has been limited to coarse, binary (pass/fail) outcomes. This paper bridges this research gap by operationalizing regulatory compliance as a quantitative and dynamic trust metric through our novel automated compliance engine (ACE). ACE first formalizes legal and organiza"
+  },
+  {
+    "id": 112,
+    "title": "Kite: How to Delegate Voting Power Privately",
+    "authors": "Kamilla Nazirkhanova, Vrushank Gunjur, X. Pilli Cruz-De Jesus, Dan Boneh",
+    "session": "Privacy & Trust",
+    "abstract": "Ensuring election privacy is crucial to maintaining the integrity of a democratic process. Often, voting power is delegated to representatives (e.g., in congress) who subsequently vote on behalf of voters on specific issues. This delegation model is also widely used in Decentralized Autonomous Organizations (DAOs). Although several existing voting systems used in DAOs support private voting, they only offer public delegation. In this paper, we introduce Kite, a protocol that enables {\\em private} delegation of voting power for DAO members. Voters can freely delegate, revoke, and re-delegate th"
+  },
+  {
+    "id": 113,
+    "title": "Delegated Fair Exchange via Threshold Wallets",
+    "authors": "Jay Taylor, Paul Gerhart, Sri AravindaKrishnan Thyagarajan",
+    "session": "Threshold & Encryption",
+    "abstract": "AI agents and custodial services are increasingly being entrusted as intermediaries to conduct transactions on behalf of institutions. The stakes are high: The digital asset market is projected to exceed \\$16 trillion by 2030, where exchanges often involve proprietary, time-sensitive goods. Although industry efforts like Google’s Agent-to-Payments (AP2) protocol standardize how agents authorize payments, they leave open the core challenge of fair exchange: ensuring that a buyer obtains the asset if and only if the seller is compensated without exposing sensitive information.  We introduce prox"
+  },
+  {
+    "id": 117,
+    "title": "Where Does MEV Really Come From?",
+    "authors": "Bence Ladóczki, Miklós Rásonyi, János Tapolcai",
+    "session": "DeFi & AMMs",
+    "abstract": "A central question of the Ethereum ecosystem is where Maximal Extractable Value (MEV) revenue originates and to what extent it stems from harming unsuspecting users. It is acceptable if MEV arises from arbitrages between centralised and decentralised exchanges (CEX--DEX). Yet theoretical models have significantly underestimated the scale of these arbitrages, while empirical studies have highlighted their importance — though these remain conservative estimates, constrained by numerous debatable heuristic assumptions. Revisiting the theoretical model, we found that CEX–DEX arbitrages require tra"
+  },
+  {
+    "id": 123,
+    "title": "On Stabilizing the Staking Rate",
+    "authors": "Carlo Brunetta, Amit Chaudhary, Stefano Galatolo, Massimiliano Sala",
+    "session": "PoS & Block Production",
+    "abstract": "Dynamically distributed inflation is a common mechanism used to guide a blockchain's staking rate towards a desired equilibrium between network security and token liquidity.  However, the high sensitivity of the annual percentage yield to changes in the staking rate, coupled with the inherent feedback delays in staker responses, can induce undesirable oscillations around this equilibrium.  This paper investigates this instability phenomenon.  We analyze the dynamics of inflation-based reward systems and propose a novel distribution model designed to stabilize the staking rate.  Our solution ef"
+  },
+  {
+    "id": 128,
+    "title": "Reuse of Public Keys Across UTXO and Account-Based Cryptocurrencies",
+    "authors": "Rainer Stütz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
+    "session": "Nonce and Key Reuse",
+    "abstract": "It is well known that reusing cryptocurrency addresses undermines privacy. This also applies if the same addresses are used in different cryptocurrencies. Nevertheless, cross-chain address reuse appears to be a recurring phenomenon, especially in EVM-based designs. Previous works performed either direct address matching, or basic format conversion, to identify such cases. However, seemingly incompatible address formats e.g., in Bitcoin and Ethereum, can also be derived from the same public keys, since they rely on the same cryptographic primitives. In this paper, we therefore focus on the unde"
+  },
+  {
+    "id": 137,
+    "title": "A Theoretical Approach to Stablecoin Design via Price Windows",
+    "authors": "Katherine Molinet, Aris Filos-Ratsikas",
+    "session": "DeFi & AMMs",
+    "abstract": "In this paper, we explore the short- and long-term stability in backed stablecoins which offer constant mint and redeem prices to all agents. We refer to such designs as \"price window-based,\" since the mint and redeem prices constrain the stablecoin's market equilibrium. We show that, without secondary stabilization mechanisms, price window designs cannot achieve both short- and long-term stability unless they are backed by already-stable reserves. In particular, the mechanism faces a tradeoff: either risk eventual reserve depletion through persistent arbitrage by a speculator, or widen the di"
+  },
+  {
+    "id": 141,
+    "title": "Rationally Analyzing Shelby",
+    "authors": "Michael Crystal, Guy Goren, Scott Duke Kominers",
+    "session": "Incentives & Decentralization",
+    "abstract": "Decentralized storage is one of the most natural applications built on blockchains and a central component of the Web3 ecosystem. Yet despite a decade of active development---from IPFS and Filecoin to more recent entrants---most of these storage protocols have received limited formal analysis of their incentive properties. Claims of incentive compatibility are sometimes made, but rarely proven. This gap matters: without well-designed incentives, a system may distribute storage but fail to truly decentralize it.  We analyze Shelby, a recently proposed storage network protocol, and provide the f"
+  },
+  {
+    "id": 146,
+    "title": "SoK: Lookup Table Arguments",
+    "authors": "Hossein Hafezi, Gaspard Anthoine, Matteo Campanelli, Dario Fiore",
+    "session": "Zero-Knowledge Proofs",
+    "abstract": "Lookup arguments have become a central tool in proof systems, powering a range of practical applications. They enable the efficient enforcement of non-native operations, such as bit decomposition, range checks, comparisons, and floating-point arithmetic. They underpin zk-VMs by modelling instruction tables, provide set membership proofs in stateful computations, and strengthen extractors by ensuring witnesses belong to small domains. Despite these broad uses, existing lookup constructions vary widely in assumptions, efficiency, and composability. In this work, we systematize the design of look"
+  },
+  {
+    "id": 147,
+    "title": "Efficient Privacy-Preserving Blueprints for Threshold Comparison",
+    "authors": "Pratyush Ranjan Tiwari, Harry Eldridge, Matthew Green",
+    "session": "Privacy & Trust",
+    "abstract": "Privacy-Preserving Blueprints (PPBs), introduced by Kohlweiss et al. in in EUROCRYPT 2023, offer a method for balancing user privacy and bad-actor detection in private cryptocurrencies. A PPB scheme allows a user to append a verifiable escrow to their transactions which reveals some identifying information to an authority in the case that the user misbehaved. A natural PPB functionality is for escrows to reveal user information if the user sends an amount of currency over a certain threshold. However, prior works constructing PPBs for such a functionality have severe limitations when it comes "
+  },
+  {
+    "id": 156,
+    "title": "Adaptively Secure Threshold ElGamal Decryption from DDH",
+    "authors": "Sourav Das, Ling Ren, Ziling Yang",
+    "session": "Threshold & Encryption",
+    "abstract": "Threshold decryption schemes allow a group of decryptors, each holding a private key share, to jointly decrypt ciphertexts. Over the years, numerous threshold decryption schemes have been proposed for applications such as secure data storage, internet auctions, and voting, and recently as a tool to protect against miner-extractable value attacks in blockchain. Despite the importance and popularity of threshold decryption, many natural and practical threshold decryption schemes have only been proven secure against static adversaries.  In this paper, we present two threshold decryption schemes t"
+  },
+  {
+    "id": 166,
+    "title": "AI Agent Smart Contract Exploit Generation",
+    "authors": "Arthur Gervais, Liyi Zhou",
+    "session": "AI and ML Security",
+    "abstract": "Smartcontractvulnerabilitieshaveledtobillionsinlosses,yet finding exploits remains challenging. Traditional fuzzers rely on heuristics and struggle with complex attacks, while human auditors are thorough but slow and don’t scale. Large Language Models offer a promising middle ground, combining human-like reasoning with machine speed.  However, early studies show that simply prompting LLMs generates unverified vulnerability speculations with high false positive rates. To address this, we present A1, an agentic system that transforms any LLM into an end-to-end exploit generator. A1 provides agen"
+  },
+  {
+    "id": 171,
+    "title": "Minimmit: Fast Finality with Even Faster Blocks",
+    "authors": "Brendan Kobayashi Chou, Andrew Lewis-Pye, Patrick O'Grady",
+    "session": "Consensus — Fast Finality",
+    "abstract": "Achieving low-latency consensus in geographically distributed systems remains a key challenge for blockchain and distributed database applications. To this end, there has been significant recent interest in State-Machine-Replication (SMR) protocols that achieve \\emph{2-round finality} under the assumption that $5f+1\\leq n$, where $n$ is the number of processors and $f$ bounds the number of processors that may exhibit Byzantine faults. In these protocols, instructions are organised into \\emph{views}, each led by a different designated leader, and 2-round finality means that a leader's proposal "
+  },
+  {
+    "id": 179,
+    "title": "The Free Option Problem of ePBS",
+    "authors": "Bruno Mazorra, Burak Oz, Christoph Schlegel, Fei Wu",
+    "session": "PoS & Block Production",
+    "abstract": "Ethereum’s upcoming Glamsterdam upgrade introduces EIP-7732 \\emph{enshrined Proposer–Builder Separation} (ePBS) which improves the block production pipeline by addressing trust and scalability challenges. Yet it also creates a new liveness risk: builders gain a short-dated \"free\" option to invalidate the execution payload they committed to, without incurring an additional penalty. Exercising this option prevents the state transition for the slot in question, thereby degrading network liveness.  We present the first systematic study of the free option problem. Our theoretical results predict th"
+  },
+  {
+    "id": 186,
+    "title": "Low-Latency Dynamically Available Total Order Broadcast",
+    "authors": "Sravya Yandamuri, Nibesh Shrestha, Luca Zanolini, Kartik Nayak",
+    "session": "Consensus — Fast Finality",
+    "abstract": "This work addresses the problem of Byzantine Fault-Tolerant (BFT) Total-Order Broadcast (TOB) in a dynamically available setting, where parties can transition between online and offline states without knowing the number of active parties. Dynamically available protocols are known to not be secure if parties commit at the speed of the network. In line with this result, existing dynamically available protocols rely on a synchronous network assumption, which means their latency remains tied to the pessimistic network delay $\\Delta$, even when the actual network delay is $\\delta << \\Delta$. This r"
+  },
+  {
+    "id": 187,
+    "title": "L for the Price of One",
+    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hernán Dario Vanegas Madrigal",
+    "session": "Threshold & Encryption",
+    "abstract": "In threshold ECDSA a committee of $N$ parties holds---say, Shamir---shares of degree $t$ of a secret key, where typically $N\\gg t$ for operational purposes (e.g. redundancy to prevent losing the key). At signing time, $t+1$ parties can execute a protocol to produce a signature on a given message without leaking anything about the secret key. In this work we show that if we use $n=t+2(\\ell-1) + 1$ parties for signing instead, we can compute $\\ell$ signatures without increasing at all the communication costs per party, essentially getting $\\ell\\times$ more signatures almost for free in a dishone"
+  },
+  {
+    "id": 190,
+    "title": "Post-Quantum Readiness in EdDSA Chains",
+    "authors": "Foteini Baldimtsi, Konstantinos Chalkias, Arnab Roy, Mahdi Sedaghat",
+    "session": "Post-Quantum Cryptography",
+    "abstract": "Quantum computers pose a critical threat to blockchains that rely on ECDSA, such as Bitcoin and Ethereum, due to public key exposure and lack of post-quantum protections. Existing proposals for migrating to quantum-secure signatures, including hybrid constructions and zero knowledge key updates, often require address changes or fail to secure inactive accounts.  In this work, we show that EdDSA-based blockchains like Sui, Solana, Near, and others offer a structural advantage: their keys are deterministically derived from a seed according to RFC 8032, allowing users to prove ownership through z"
+  },
+  {
+    "id": 197,
+    "title": "Latency Advantages in Common-Value Auctions",
+    "authors": "Ciamac C. Moallemi, Mallesh M. Pai, Dan Robinson",
+    "session": "DeFi & AMMs",
+    "abstract": "In financial applications, latency advantages---the ability to make decisions later than others, even without the ability to see what others have done---can provide individual participants with an edge by allowing them to gather additional relevant information. For example, a trader who is able to act even milliseconds after another trader may receive information about changing prices on other exchanges that lets them make a profit at the expense of the latter. To better understand the economics of latency advantages, we consider a common-value auction with a reserve price in which some bidder"
+  },
+  {
+    "id": 209,
+    "title": "Real AI Agents with Fake Memories",
+    "authors": "Atharv Singh Patlan, Peiyao Sheng, S. Ashwin Hebbar, Prateek Mittal, Pramod Viswanath",
+    "session": "AI and ML Security",
+    "abstract": "AI agents integrated with Web3 offer autonomy and openness but also raise serious security concerns as they interact with financial protocols and immutable smart contracts. This paper examines vulnerabilities of blockchain-based agents under adversarial threats. We introduce context manipulation, a broad attack vector that exploits unprotected context surfaces and exposes a more stealthy, persistent threat: memory injection. Using ElizaOS, a decentralized AI agent framework for automated Web3 operations, we show that malicious injections into prompts or stored history can trigger unauthorized "
+  },
+  {
+    "id": 212,
+    "title": "Does Your Blockchain Need Multidimensional Transaction Fees",
+    "authors": "Nir Lavee, Noam Nisan, Mallesh M. Pai, Max Resnick",
+    "session": "Incentives & Decentralization",
+    "abstract": "Blockchains have block‑size limits to ensure the entire cluster can keep up with the tip of the chain. These block-size limits are usually single-dimensional, but richer multi‑dimensional constraints allow for greater throughput. The potential for performance improvements from multidimensional resource pricing has been discussed in the literature and is actively in consideration/ under implementation at various blockchains, but exactly how big those performance improvements are remains unclear. In order to identify the magnitude of additional throughput that can be unlocked by multidimensional"
+  },
+  {
+    "id": 216,
+    "title": "A Trilemma in AMM Mechanism Design",
+    "authors": "Yuhao Li, Elaine Shi, Mengqian Zhang",
+    "session": "DeFi & AMMs",
+    "abstract": "Blockchains have popularized the Automated Market Makers (AMMs), where users trade crypto-assets with a smart contract, governed by a pricing function embedded in the contract's code. Today, users of AMMs are often forced to accept unfavorable prices due to widespread front-running and back-running attacks, commonly known as Several earlier works show impossibility results suggesting that completely removing MEV at the consensus layer is impossible partly because the consensus layer is agnostic of application-level semantics. For this reason, more recent works have advocated mechanism design a"
+  },
+  {
+    "id": 220,
+    "title": "Routing Attacks in Ethereum PoS: A Systematic Exploration",
+    "authors": "Constantine Doumanidis, Maria Apostolaki",
+    "session": "PoS & Block Production",
+    "abstract": "With the promise of greater decentralization and sustainability, Ethereum transitioned from a Proof-of-Work (PoW) to a Proof-of-Stake (PoS) consensus mechanism. The goal of this paper is to investigate the security of Ethereum’s PoS system from an Internet routing perspective. To this end, this paper makes two contributions: First, we devise a novel framework for inferring the distribution of validators on the Internet with minimal disturbance to the real network. Second, we introduce a class of network-level attacks on Ethereum’s PoS system that jointly exploit Internet routing vulnerabilitie"
+  },
+  {
+    "id": 223,
+    "title": "Revisiting Post-quantum Robustly Reusable Fuzzy Extractors",
+    "authors": "Somnath Panja, Reihaneh Safavi-Naini",
+    "session": "Post-Quantum Cryptography",
+    "abstract": "Fuzzy extractors (FE) are cryptographic primitives that, for two samples w and w′ of a randomness source, extract the same consistent, uniformly random key when the distance (in some metric space) between w and w′ is less than a threshold. The FE’s Gen algorithm takes w and generates a secret key R and a public value P that will be used by the Rep to recover R from w′. Robustly reusable FEs (rrFE) ensure security of R against an adversary that has access to multiple outputs of the Gen algorithm and its goal is to construct a P that is acceptable by Rep. rrFEs have found wide applications in bi"
+  },
+  {
+    "id": 224,
+    "title": "STAR: Stylized and Transferable Adversarial Robustness",
+    "authors": "Qing Luo, Yili Wang, Zhi Chen, Xiangwen Xiao, Cheng Zeng, Xiaoyi Zhou",
+    "session": "AI and ML Security",
+    "abstract": "Deep Neural Networks (DNNs) remain vulnerable to adversarial examples. Conventional LP-norm attacks achieve high white-box success but transfer poorly due to reliance on model-specific minima, while unrestricted attacks (e.g., style transfer) improve naturalness but overfit to surrogate model preferences, limiting reliability. We identify surrogate overfitting as the key bottleneck and propose STAR, a bilevel framework combining style transfer with Reverse Adversarial Perturbation (RAP). STAR explicitly seeks flat regions of the loss landscape: inner-loop ascent explores robust adversarial dir"
+  },
+  {
+    "id": 229,
+    "title": "Efficient Byzantine Agreement in the Presence of Omission Faults",
+    "authors": "Simon Holmgaard Kamp, Julian Loss, Kartik Nayak, Kecheng Shi",
+    "session": "Consensus — Fast Finality",
+    "abstract": "We present a simple and efficient Byzantine Agreement protocol in the mixed fault model where up to $t$ parties can be Byzantine, up to $s$ parties can be send-omission, and up to $r$ parties can be receive-omission such that $2t+s+r<n$. Our synchronous protocol greatly improves over the efficiency of the state-of-the-art solution due to Loss and Stern [TCC '23]. Specifically, our protocol incurs an expected communication complexity of $O(n^2)$ instead of $O(n^5)$ in their construction, while maintaining the same resilience. Our protocol terminates in an expected constant number of rounds, pro"
+  },
+  {
+    "id": 231,
+    "title": "Beyond Winner-Take-All Procurement Auctions",
+    "authors": "Pranav Garimidi, Michael Neuder, Tim Roughgarden",
+    "session": "PoS & Block Production",
+    "abstract": "Blockchain protocols often seek to procure computationally challenging work from a decentralized set of participants. While simple procurement auctions are possible and result in the minimal protocol cost of acquisition and maximal efficiency, they also lead to concentration in the provider set due to the winner-take-all market structure. We design and analyze single-good procurement auctions that balance social-cost minimization (at the extreme, a winner-take-all auction) with decentralization (at the extreme, a uniform allocation). We first give a dominant-strategy incentive-compatible (DSIC"
+  },
+  {
+    "id": 239,
+    "title": "Efficient Partially Blind Signatures from Isogenies",
+    "authors": "Dung Hoang Duong, Chunpeng Ge, Xuan Thanh Khuc, Willy Susilo",
+    "session": "Post-Quantum Cryptography",
+    "abstract": "(Partially) blind signatures are foundational cryptographic primitives that enable privacy-preserving authentication in digital systems. Blind signatures allow a user to obtain a signature on a message without revealing its content, while partially blind signatures permit the controlled inclusion of agreed-upon public. These primitives are central to applications such as electronic voting, anonymous credentials, and digital cash.  The first isogeny-based construction of (partially) blind signatures, CSIOtter, were proposed by Katsumata et al. at CRYPTO'23. However, its concurrent security was "
+  },
+  {
+    "id": 240,
+    "title": "The Last Challenge Attack",
+    "authors": "Oana Ciobotaru, Maxim Peter, Vesselin Velichkov",
+    "session": "Zero-Knowledge Proofs",
+    "abstract": "The Fiat-Shamir transform [1] is a well-known and widely employed technique for converting sound public-coin interactive protocols into sound non-interactive protocols. Even though the transformation itself is relatively clear and simple, some implementations choose to deviate from the specifications, for example for performance reasons. In this short note, we present a vulnerability arising from such a deviation in a KZG-based PLONK verifier implementation. This deviation stemmed from the incorrect computation of the last challenge of the PLONK protocol [2], where the KZG batching proof chall"
+  },
+  {
+    "id": 252,
+    "title": "SoK: Approximate Agreement",
+    "authors": "Diana Ghinea, Chen-Da Liu-Zhang",
+    "session": "Consensus & Smart Contracts",
+    "abstract": "Approximate Agreement (AA) is a relaxation of consensus that requires honest parties to output values that are close and within the range of honest inputs. Introduced to bypass impossibility results for exact consensus, AA has become a versatile primitive with applications from blockchain oracles to cyber-physical systems.  This paper provides a systematization of knowledge (SoK) on byzantine-resilient AA in complete networks. We mainly focus on real-valued inputs, the setting best understood in the literature, and chart the feasibility frontiers in synchronous, asynchronous, and network-agnos"
+  },
+  {
+    "id": 253,
+    "title": "LLMs as verification oracles for Solidity",
+    "authors": "Massimo Bartoletti, Livio Pompianu, Enrico Lipparini",
+    "session": "AI and ML Security",
+    "abstract": "Ensuring the correctness of smart contracts is critical, as even subtle flaws can lead to severe financial losses. While bug detection tools able to spot common vulnerability patterns can serve as a first line of defense, most real-world exploits and losses stem from errors in the contract business logic. Formal verification tools such as SolCMC and the Certora Prover address this challenge, but their impact remains limited by steep learning curves and restricted specification languages. Recent works have begun to explore the use of large language models (LLMs) for security-related tasks such "
+  },
+  {
+    "id": 258,
+    "title": "Updatable Public-Key Encryption from Class Groups",
+    "authors": "Harish Karthikeyan, Antigoni Polychroniadou",
+    "session": "Threshold & Encryption",
+    "abstract": "Updatable Public-Key Encryption (UPKE) enables forward-secure key evolution, protecting past messages in case of key compromise. We present efficient UPKE schemes, including a standard-model construction that can replace RTreeKEM (Alwen \\textit{et al.}, CRYPTO 2020) for secure group messaging. Our CPA-secure scheme under the Hard Subgroup Membership (HSM) assumption—requiring no trusted setup—achieves 1.9× smaller key and ciphertext sizes than the most efficient standard-model construction of Haidar \\textit{et al.} (CCS 2022, HLP). Encryption, decryption, and key-update operations are faster, "
+  }
+]
