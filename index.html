@@ -68,6 +68,7 @@ input:focus { outline: none; border-color: #58a6ff; }
   <div id="claim-papers"></div>
   <div id="claim-form">
     <h2 id="selected-title"></h2>
+    <div id="email-coverage" style="margin-bottom:12px"></div>
     <label for="email">Your author email</label>
     <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
     <label for="recipient">Recipient ETH address</label>
@@ -161,6 +162,18 @@ function selectPaper(id) {
   const el = document.querySelector(`#claim-papers .paper-card[data-id="${id}"]`);
   if (el) el.classList.add("selected");
   document.getElementById("selected-title").textContent = `#${id}: ${selectedPaper.title}`;
+
+  const numAuthors = (selectedPaper.authors || "").split(",").length;
+  const numHashes = (selectedPaper.email_hashes || []).length;
+  const cov = document.getElementById("email-coverage");
+  if (numHashes === 0) {
+    cov.innerHTML = `<span style="color:#f85149">No author emails registered for this paper.</span> <a href="https://github.com/${REPO}#missing-emails" style="color:#58a6ff">Contact us</a> to add yours.`;
+  } else if (numHashes < numAuthors) {
+    cov.innerHTML = `<span style="color:#e3b341">${numHashes} of ~${numAuthors} author emails registered.</span> If yours isn't recognized, <a href="https://github.com/${REPO}#missing-emails" style="color:#58a6ff">let us know</a>.`;
+  } else {
+    cov.innerHTML = `<span style="color:#7ee787">${numHashes} author email(s) registered.</span>`;
+  }
+
   document.getElementById("claim-form").style.display = "block";
   document.getElementById("result").style.display = "none";
   document.getElementById("email").focus();
@@ -192,7 +205,16 @@ async function checkAndGenerate() {
   }
 
   const title = encodeURIComponent(`[PAPER] Claim paper #${selectedPaper.id}`);
-  const body = encodeURIComponent(`paper_id: ${selectedPaper.id}\nemail_hash: ${hash}\nrecipient: ${recipient}`);
+  const body = encodeURIComponent([
+    `paper_id: ${selectedPaper.id}`,
+    `email_hash: ${hash}`,
+    `recipient: ${recipient}`,
+    ``,
+    `---`,
+    `> **How this works:** Filing this issue triggers a GitHub Action that sends a verification email to the address matching this hash. Reply with the code from that email to complete your claim and mint the NFT.`,
+    `>`,
+    `> \`email_hash\` = sha256(CLAIM_SALT + your_email), where CLAIM_SALT = "FC26-rump-session-2026". Your email is not revealed in this issue.`,
+  ].join('\n'));
   const url = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}`;
 
   result.className = "success"; result.style.display = "block";
