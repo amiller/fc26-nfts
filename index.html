@@ -112,11 +112,10 @@ async function sha256hex(str) {
 }
 
 async function load() {
-  const [pRes, cRes, iRes] = await Promise.all([
-    fetch("papers.json"), fetch("claims.json").catch(() => null), fetch("ipfs_mapping.json")
+  const [pRes, cRes] = await Promise.all([
+    fetch("papers.json"), fetch("claims.json").catch(() => null)
   ]);
   papers = await pRes.json();
-  ipfsMap = await iRes.json();
   if (cRes && cRes.ok) {
     const data = await cRes.json();
     for (const c of data.claims) (claimsByPaper[c.paperId] ||= []).push(c);
