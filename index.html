@@ -57,6 +57,21 @@ input:focus { outline: none; border-color: #58a6ff; }
 <h1>FC'26 Rump Session NFT</h1>
 <p class="subtitle">Unofficial paper author NFTs for FC 2026. Prove email authorship via ZK-TLS to claim yours.</p>
 
+<div style="background:#161b22; border:1px solid #30363d; border-radius:8px; padding:16px 20px; margin-bottom:24px; font-size:0.9em; color:#8b949e; line-height:1.6;">
+  <strong style="color:#c9d1d9;">How this works:</strong>
+  Each FC'26 rump session paper has an NFT that authors can claim by proving they control an email address listed on the paper.
+  The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc#fd334b" style="color:#58a6ff">ZK-TLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions — no trusted server required.
+  <ol style="margin:8px 0 0 20px; padding:0; color:#c9d1d9;">
+    <li>Select your paper and enter your email — your email is checked <em>locally</em> against a hash and never leaves your browser</li>
+    <li>Open a GitHub issue containing only your email's hash (not the email itself)</li>
+    <li>A GitHub Action sends a verification code to your email</li>
+    <li>Reply with the code — the action generates a ZK proof and mints your NFT on Base Sepolia</li>
+  </ol>
+  <div style="margin-top:10px;">
+    <a href="https://github.com/amiller/fc26-nfts" style="color:#58a6ff">GitHub repo & README</a> · <a href="https://www.overleaf.com/read/vmwnhsrmbdgc#fd334b" style="color:#58a6ff">ZK-TLS paper</a>
+  </div>
+</div>
+
 <div class="stats" id="stats"></div>
 
 <div class="tabs">
