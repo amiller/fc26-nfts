@@ -59,7 +59,7 @@ jobs:
 
             const hashMatch = botComment.body.match(/Challenge hash: `([a-f0-9]{64})`/);
             const paperIdMatch = botComment.body.match(/Paper ID: `(\d+)`/);
-            const emailMatch = botComment.body.match(/Email: `(\S+@\S+\.\S+)`/);
+            const emailMatch = botComment.body.match(/Email hash: `([a-f0-9]{64})`/);
             const recipientMatch = botComment.body.match(/Recipient: `(0x[a-fA-F0-9]{40})`/);
             const timestampMatch = botComment.body.match(/Timestamp: `([^`]+)`/);
             const runIdMatch = botComment.body.match(/Run ID: `(\d+)`/);
@@ -101,7 +101,7 @@ jobs:
 
             core.setOutput('challenge_hash', hashMatch[1]);
             core.setOutput('paper_id', paperIdMatch[1]);
-            core.setOutput('email', emailMatch[1]);
+            core.setOutput('email_hash', emailMatch[1]);
             core.setOutput('recipient', recipientMatch[1]);
             core.setOutput('token', token);
 
@@ -122,6 +122,19 @@ jobs:
           TOKEN: ${{ steps.meta.outputs.token }}
           EXPECTED_HASH: ${{ steps.meta.outputs.challenge_hash }}
 
+      - name: Resolve email hash
+        if: steps.meta.outputs.skip != 'true'
+        id: resolve
+        run: |
+          HASH="${{ steps.meta.outputs.email_hash }}"
+          EMAIL=$(echo '${{ secrets.EMAIL_LOOKUP }}' | python3 -c "import sys,json; d=json.load(sys.stdin); e=d.get('$HASH',''); print(e)")
+          if [ -z "$EMAIL" ]; then
+            echo "::error::Email hash not recognized"
+            exit 1
+          fi
+          echo "::add-mask::$EMAIL"
+          echo "email=$EMAIL" >> $GITHUB_OUTPUT
+
       - name: Generate certificate
         if: steps.meta.outputs.skip != 'true'
         run: |
@@ -130,7 +143,7 @@ jobs:
           {
             "type": "paper-authorship",
             "paper_id": "${{ steps.meta.outputs.paper_id }}",
-            "email": "${{ steps.meta.outputs.email }}",
+            "email": "${{ steps.resolve.outputs.email }}",
             "recipient_address": "${{ steps.meta.outputs.recipient }}",
             "nft_contract": "${{ vars.PAPER_NFT_ADDRESS }}",
             "chain_id": 84532,
@@ -242,7 +255,7 @@ jobs:
         with:
           script: |
             const txHash = '${{ steps.submit.outputs.tx_hash }}';
-            const email = '${{ steps.meta.outputs.email }}';
+            const emailHash = '${{ steps.meta.outputs.email_hash }}';
             const recipient = '${{ steps.meta.outputs.recipient }}';
             const paperId = '${{ steps.meta.outputs.paper_id }}';
 
@@ -254,7 +267,7 @@ jobs:
                 `## ✅ Author Verified — Paper NFT Minted!`,
                 ``,
                 `**Paper:** #${paperId}`,
-                `**Email:** \`${email}\``,
+                `**Email hash:** \`${emailHash}\``,
                 `**Recipient:** \`${recipient}\``,
                 `**Transaction:** [${txHash}](https://sepolia.basescan.org/tx/${txHash})`,
                 ``,

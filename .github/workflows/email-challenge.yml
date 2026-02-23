@@ -7,11 +7,11 @@
 #   Title: [PAPER] Claim paper NFT
 #   Body:
 #     paper_id: 5
-#     email: user@example.com
+#     email_hash: <sha256 of salt+email>
 #     recipient: 0x1234...
 #
 # REQUIRED SECRETS:
-#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, SES_FROM_EMAIL, AWS_REGION
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, SES_FROM_EMAIL, AWS_REGION, EMAIL_LOOKUP
 
 name: Paper NFT Challenge
 
@@ -41,12 +41,12 @@ jobs:
             }
             const paperId = paperMatch[1];
 
-            const emailMatch = body.match(/email:\s*(\S+@\S+\.\S+)/i);
-            if (!emailMatch) {
-              core.setFailed('No email found. Use format: email: user@example.com');
+            const emailHashMatch = body.match(/email_hash:\s*([a-f0-9]{64})/i);
+            if (!emailHashMatch) {
+              core.setFailed('No email_hash found. Use format: email_hash: <64-char hex>');
               return;
             }
-            const email = emailMatch[1].toLowerCase();
+            const emailHash = emailHashMatch[1].toLowerCase();
 
             const addrMatch = body.match(/recipient:\s*(0x[a-fA-F0-9]{40})/i);
             if (!addrMatch) {
@@ -56,9 +56,9 @@ jobs:
             const recipient = addrMatch[1].toLowerCase();
 
             core.setOutput('paper_id', paperId);
-            core.setOutput('email', email);
+            core.setOutput('email_hash', emailHash);
             core.setOutput('recipient', recipient);
-            console.log(`Paper: ${paperId}, Email: ${email}, Recipient: ${recipient}`);
+            console.log(`Paper: ${paperId}, Email hash: ${emailHash}, Recipient: ${recipient}`);
 
       - name: Generate challenge token
         id: challenge
@@ -69,6 +69,18 @@ jobs:
           echo "hash=$HASH" >> $GITHUB_OUTPUT
           echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_OUTPUT
 
+      - name: Resolve email hash
+        id: resolve
+        run: |
+          HASH="${{ steps.parse.outputs.email_hash }}"
+          EMAIL=$(echo '${{ secrets.EMAIL_LOOKUP }}' | python3 -c "import sys,json; d=json.load(sys.stdin); e=d.get('$HASH',''); print(e)")
+          if [ -z "$EMAIL" ]; then
+            echo "::error::Email hash not recognized. Not a registered author email."
+            exit 1
+          fi
+          echo "::add-mask::$EMAIL"
+          echo "email=$EMAIL" >> $GITHUB_OUTPUT
+
       - name: Send verification email
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -76,7 +88,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
         run: |
           FROM="${{ secrets.SES_FROM_EMAIL }}"
-          TO="${{ steps.parse.outputs.email }}"
+          TO="${{ steps.resolve.outputs.email }}"
           TOKEN="${{ steps.challenge.outputs.token }}"
           RECIPIENT="${{ steps.parse.outputs.recipient }}"
           PAPER_ID="${{ steps.parse.outputs.paper_id }}"
@@ -112,7 +124,7 @@ jobs:
           script: |
             const hash = '${{ steps.challenge.outputs.hash }}';
             const timestamp = '${{ steps.challenge.outputs.timestamp }}';
-            const email = '${{ steps.parse.outputs.email }}';
+            const emailHash = '${{ steps.parse.outputs.email_hash }}';
             const recipient = '${{ steps.parse.outputs.recipient }}';
             const paperId = '${{ steps.parse.outputs.paper_id }}';
 
@@ -130,7 +142,7 @@ jobs:
                 ``,
                 `- Challenge hash: \`${hash}\``,
                 `- Paper ID: \`${paperId}\``,
-                `- Email: \`${email}\``,
+                `- Email hash: \`${emailHash}\``,
                 `- Recipient: \`${recipient}\``,
                 `- Timestamp: \`${timestamp}\``,
                 `- Run ID: \`${context.runId}\``,

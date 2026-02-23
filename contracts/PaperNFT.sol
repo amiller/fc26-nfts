@@ -10,8 +10,9 @@ contract PaperNFT {
     ISigstoreVerifier public immutable verifier;
     address public immutable owner;
 
-    string public name = "FC26 Paper";
-    string public symbol = "FC26";
+    string public name = "FC26 Rump Session NFT";
+    string public symbol = "FC26RUMP";
+    bytes32 public constant EMAIL_SALT = keccak256("FC26-rump-session-2026");
 
     // ERC-721 state
     mapping(uint256 => address) public ownerOf;
@@ -28,7 +29,7 @@ contract PaperNFT {
     mapping(bytes32 => bool) public claimed;
     // Token metadata
     mapping(uint256 => uint256) public tokenPaperId;
-    mapping(uint256 => string) public tokenEmail;
+    mapping(uint256 => bytes32) public tokenEmailHash;
     mapping(uint256 => string) public tokenMetadataURI; // per-token IPFS metadata
 
     bytes20 public requiredCommitSha;
@@ -36,7 +37,7 @@ contract PaperNFT {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
-    event Claimed(address indexed recipient, uint256 paperId, string email, uint256 tokenId);
+    event Claimed(address indexed recipient, uint256 paperId, bytes32 emailHash, uint256 tokenId);
     event PaperRegistered(uint256 paperId, uint256 numAuthors);
 
     error InvalidProof();
@@ -133,11 +134,12 @@ contract PaperNFT {
 
         uint256 tokenId = uint256(claimKey);
         tokenPaperId[tokenId] = paperId;
-        tokenEmail[tokenId] = emailLower;
+        bytes32 saltedHash = keccak256(abi.encodePacked(EMAIL_SALT, emailLower));
+        tokenEmailHash[tokenId] = saltedHash;
         _mint(recipient, tokenId);
         totalSupply++;
 
-        emit Claimed(recipient, paperId, email, tokenId);
+        emit Claimed(recipient, paperId, saltedHash, tokenId);
     }
 
     function setRequirements(bytes20 _commitSha) external onlyOwner {

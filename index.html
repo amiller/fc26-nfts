@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FC'26 Rump Session NFT — Claim</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.5; }
+h1 { font-size: 1.4em; margin-bottom: 4px; }
+.subtitle { color: #666; margin-bottom: 24px; font-size: 0.95em; }
+.paper { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.15s; }
+.paper:hover { border-color: #999; }
+.paper.selected { border-color: #0969da; background: #f0f7ff; }
+.paper .title { font-weight: 600; font-size: 0.95em; }
+.paper .meta { color: #666; font-size: 0.85em; margin-top: 2px; }
+.session-group { margin-top: 20px; }
+.session-group h3 { font-size: 0.85em; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #eee; }
+#claim-form { display: none; margin-top: 24px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa; }
+#claim-form h2 { font-size: 1.1em; margin-bottom: 12px; }
+label { display: block; font-size: 0.9em; font-weight: 500; margin-bottom: 4px; margin-top: 12px; }
+input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; }
+input:focus { outline: none; border-color: #0969da; }
+#check-btn { margin-top: 16px; padding: 10px 20px; background: #0969da; color: white; border: none; border-radius: 6px; font-size: 0.95em; cursor: pointer; }
+#check-btn:hover { background: #0758b3; }
+#check-btn:disabled { background: #ccc; cursor: default; }
+#result { margin-top: 16px; padding: 14px; border-radius: 6px; display: none; }
+#result.success { background: #dff6dd; border: 1px solid #9be09b; }
+#result.error { background: #ffeef0; border: 1px solid #f0b8c0; }
+#result a { color: #0969da; font-weight: 500; }
+.info { color: #666; font-size: 0.85em; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<h1>FC'26 Rump Session NFT</h1>
+<p class="subtitle">Claim your paper author NFT. Select your paper, then verify your email to mint.</p>
+
+<div id="papers-list">Loading papers...</div>
+
+<div id="claim-form">
+  <h2 id="selected-title"></h2>
+  <label for="email">Your author email</label>
+  <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+  <label for="recipient">Recipient ETH address</label>
+  <input type="text" id="recipient" placeholder="0x..." pattern="0x[a-fA-F0-9]{40}">
+  <p class="info">The address that will receive the NFT on Base Sepolia.</p>
+  <button id="check-btn" onclick="checkAndGenerate()">Check eligibility</button>
+  <div id="result"></div>
+</div>
+
+<script>
+const SALT = "FC26-rump-session-2026";
+const REPO = "amiller/fc26-nfts";
+let papers = [];
+let selectedPaper = null;
+
+async function sha256hex(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function loadPapers() {
+  const res = await fetch("papers.json");
+  papers = await res.json();
+  render();
+}
+
+function render() {
+  const groups = {};
+  for (const p of papers) {
+    const key = p.session ? `Session ${p.session.number}: ${p.session.title}` : "Other";
+    (groups[key] ||= []).push(p);
+  }
+
+  let html = "";
+  for (const [session, plist] of Object.entries(groups)) {
+    html += `<div class="session-group"><h3>${session}</h3>`;
+    for (const p of plist) {
+      html += `<div class="paper" data-id="${p.id}" onclick="selectPaper(${p.id})">
+        <div class="title">#${p.id}: ${p.title}</div>
+        <div class="meta">${p.authors}</div>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+  document.getElementById("papers-list").innerHTML = html;
+}
+
+function selectPaper(id) {
+  selectedPaper = papers.find(p => p.id === id);
+  document.querySelectorAll(".paper").forEach(el => el.classList.remove("selected"));
+  document.querySelector(`.paper[data-id="${id}"]`).classList.add("selected");
+  document.getElementById("selected-title").textContent = `#${id}: ${selectedPaper.title}`;
+  document.getElementById("claim-form").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  document.getElementById("email").focus();
+}
+
+async function checkAndGenerate() {
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const recipient = document.getElementById("recipient").value.trim().toLowerCase();
+  const result = document.getElementById("result");
+
+  if (!email || !email.includes("@")) {
+    result.className = "error"; result.style.display = "block";
+    result.textContent = "Please enter a valid email address.";
+    return;
+  }
+  if (!recipient.match(/^0x[a-f0-9]{40}$/)) {
+    result.className = "error"; result.style.display = "block";
+    result.textContent = "Please enter a valid Ethereum address (0x + 40 hex chars).";
+    return;
+  }
+
+  const hash = await sha256hex(SALT + email);
+  const hashes = selectedPaper.email_hashes || [];
+
+  if (!hashes.includes(hash)) {
+    result.className = "error"; result.style.display = "block";
+    result.innerHTML = "This email is not registered as an author of this paper. Check the address or contact the organizer.";
+    return;
+  }
+
+  const title = encodeURIComponent(`[PAPER] Claim paper #${selectedPaper.id}`);
+  const body = encodeURIComponent(`paper_id: ${selectedPaper.id}\nemail_hash: ${hash}\nrecipient: ${recipient}`);
+  const url = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}`;
+
+  result.className = "success"; result.style.display = "block";
+  result.innerHTML = `Email verified locally (hash match). <a href="${url}" target="_blank">Open GitHub issue to start the claim →</a><br><span class="info">A verification email will be sent to you. Reply with the code to mint your NFT.</span>`;
+}
+
+loadPapers();
+</script>
+</body>
+</html>
