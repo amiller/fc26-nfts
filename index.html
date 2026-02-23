@@ -84,7 +84,7 @@ input:focus { outline: none; border-color: #58a6ff; }
 <script>
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
-const IPFS_GW = "https://gateway.pinata.cloud/ipfs/";
+const IMG_DIR = "images/composited/";
 let papers = [], claims = {}, ipfsMap = {}, selectedPaper = null;
 
 async function sha256hex(str) {
@@ -119,7 +119,7 @@ function renderStats() {
 
 function paperCard(p, clickable) {
   const c = claims[p.id];
-  const img = ipfsMap[p.id] ? IPFS_GW + ipfsMap[p.id].image_cid : '';
+  const img = `${IMG_DIR}${p.id}.png`;
   const badge = c ? `<span class="badge claimed">Claimed</span>` : `<span class="badge open">Open</span>`;
   const claimedBy = c ? `<div class="claimed-by">Minted to <a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}</a></div>` : '';
   return `<div class="paper-card ${c ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
