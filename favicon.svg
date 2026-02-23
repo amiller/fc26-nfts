@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0d1117"/>
+  <rect x="4" y="4" width="56" height="56" rx="9" fill="none" stroke="#30363d" stroke-width="2"/>
+  <text x="32" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#58a6ff">FC26</text>
+  <text x="32" y="48" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="900" fill="#7ee787" letter-spacing="2">RUMP</text>
+</svg>
