@@ -1,6 +1,6 @@
 # FC'26 Rump Session NFT
 
-Unofficial NFTs for FC 2026 rump session paper authors. Claim yours by proving email authorship via ZK-TLS.
+Unofficial NFTs for FC 2026 rump session paper authors. Claim yours by proving email authorship via [GitHub-ZKTLS](https://github.com/amiller/github-zktls).
 
 **Claim page:** [amiller.github.io/fc26-nfts](https://amiller.github.io/fc26-nfts/)
 

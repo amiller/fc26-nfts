@@ -1,7 +1,11 @@
 # FC'26 Rump Session NFT — Handoff Notes
 
 ## What This Is
-Unofficial NFT system where FC'26 rump session paper authors claim NFTs by proving email ownership via ZK-TLS (Sigstore + GitHub Actions). No trusted server — everything runs in GitHub Actions with a pinned prover image.
+Unofficial NFT system where FC'26 rump session paper authors claim NFTs by proving email ownership via GitHub-ZKTLS (Sigstore + GitHub Actions). No trusted server — everything runs in GitHub Actions with a pinned prover image.
+
+**Repos**:
+- NFTs: https://github.com/amiller/fc26-nfts
+- GitHub-ZKTLS: https://github.com/amiller/github-zktls
 
 ## Current State: Working E2E
 
@@ -13,7 +17,7 @@ Unofficial NFT system where FC'26 rump session paper authors claim NFTs by provi
 - **GitHub Pages**: https://amiller.github.io/fc26-nfts/
   - Gallery with per-author claim status (X of Y claimed), NFT thumbnails, Blockscout links
   - Claim tab with client-side email hash check + pre-filled issue generation
-  - "How this works" section with ZK-TLS paper link
+  - "How this works" section with GitHub-ZKTLS paper link
 - **Email privacy**:
   - `papers.json` has `email_hashes` (sha256), no plaintext
   - `papers_private.json` (gitignored) has real emails
@@ -33,7 +37,7 @@ Unofficial NFT system where FC'26 rump session paper authors claim NFTs by provi
 2. **Missing emails**: 22 papers need email lookup (HotCRP or ask authors)
 3. **Human artwork**: Commission via rentahuman.ai (briefs in `artist_briefs.md`)
 4. **Production deployment**: Set commit SHA restriction, consider mainnet
-5. **"How this works" detail**: More detailed write-up, link to ZK-TLS paper on arXiv when ready
+5. **"How this works" detail**: More detailed write-up, link to GitHub-ZKTLS paper on arXiv when ready
 6. **Concept review**: Share with Joseph Bonneau and Stefanie Roos
    - Their test papers registered: #14 (stefanie.roos@cs.rptu.de, jbonneau@gmail.com), #17 (jbonneau@gmail.com)
 
@@ -59,7 +63,7 @@ Unofficial NFT system where FC'26 rump session paper authors claim NFTs by provi
 - **SigstoreVerifier**: `0xbD08fd15E893094Ad3191fdA0276Ac880d0FA3e1`
 - **SES sender**: `noreply@teemail.soc1024.com`
 - **AWS region**: `us-east-2`
-- **ZK-TLS paper**: https://www.overleaf.com/read/vmwnhsrmbdgc#fd334b
+- **GitHub-ZKTLS paper**: https://www.overleaf.com/read/vmwnhsrmbdgc#fd334b
 
 ## Email Hash Schemes
 Two different hashes are used:
