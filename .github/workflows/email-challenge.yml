@@ -99,13 +99,13 @@ jobs:
 
           RAW_MSG="From: ${FROM}
           To: ${TO}
-          Subject: FC'26 Paper #${PAPER_ID} — Verify your author email
+          Subject: FC'26 Rump Session NFT — Verify authorship of Paper #${PAPER_ID}
           MIME-Version: 1.0
           Content-Type: text/html; charset=UTF-8
 
           <div style=\"max-width:480px;margin:0 auto;font-family:-apple-system,sans-serif;padding:20px\">
-            <h2 style=\"margin-top:0\">FC'26 Paper Author Verification</h2>
-            <p>A request was made to verify <strong>${TO}</strong> as an author of <strong>Paper #${PAPER_ID}</strong>, minting an NFT to:</p>
+            <h2 style=\"margin-top:0\">FC'26 Rump Session NFT</h2>
+            <p>A request was made to verify <strong>${TO}</strong> as an author of <strong>Paper #${PAPER_ID}</strong> for the unofficial FC'26 Rump Session NFT project, minting to:</p>
             <p style=\"font-family:monospace;background:#f5f5f5;padding:10px;border-radius:4px;word-break:break-all\">${RECIPIENT}</p>
             <p>If you authorized this, copy the code below and share it with whoever is helping you claim your NFT.</p>
             <p style=\"color:#b08800;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px;font-size:13px\">Do not share this code if you did not request this verification.</p>

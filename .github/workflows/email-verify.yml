@@ -273,7 +273,7 @@ jobs:
                 `**Recipient:** \`${recipient}\``,
                 `**Transaction:** [${txHash}](https://sepolia.basescan.org/tx/${txHash})`,
                 ``,
-                `Your FC'26 Paper Author NFT has been minted on Base Sepolia.`
+                `Your FC'26 Rump Session NFT has been minted on Base Sepolia.`
               ].join('\n')
             });
             await github.rest.issues.update({
