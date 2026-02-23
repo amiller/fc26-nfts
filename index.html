@@ -87,6 +87,8 @@ input:focus { outline: none; border-color: #58a6ff; }
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
 const IMG_DIR = "images/composited/";
+const CONTRACT = "0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1";
+const BLOCKSCOUT = "https://base-sepolia.blockscout.com";
 let papers = [], claimsByPaper = {}, ipfsMap = {}, selectedPaper = null;
 
 async function sha256hex(str) {
@@ -135,9 +137,11 @@ function paperCard(p, clickable) {
     badge = `<span class="badge partial">${pc.length} of ${numHashes} claimed</span>`;
   }
   if (pc.length > 0) {
-    claimedInfo = `<div class="claimed-by">${pc.map(c =>
-      `<a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}</a>`
-    ).join(', ')}</div>`;
+    claimedInfo = `<div class="claimed-by">${pc.map(c => {
+      const addr = `${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}`;
+      const nftLink = c.tokenId ? `<a href="${BLOCKSCOUT}/token/${CONTRACT}/instance/${BigInt(c.tokenId)}" target="_blank" title="View NFT on Blockscout">🖼</a> ` : '';
+      return `${nftLink}<a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${addr}</a>`;
+    }).join(', ')}</div>`;
   }
   return `<div class="paper-card ${pc.length > 0 ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
     <img class="paper-img" src="${img}" alt="Paper #${p.id}" loading="lazy">

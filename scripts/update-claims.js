@@ -37,21 +37,27 @@ async function main() {
 
   console.log(`Found ${allLogs.length} Claimed events`)
 
-  // Compute topic manually since we can't use ethers
   // Claimed event: topic[0]=sig, topic[1]=recipient, data=paperId(32)+emailHash(32)+tokenId(32)
+  // Also grab Transfer events for tokenId
+  const TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
   const claims = []
   for (const log of allLogs) {
     const recipient = '0x' + log.topics[1].slice(26)
     const data = log.data.slice(2) // remove 0x
     const paperId = parseInt(data.slice(0, 64), 16)
     const emailHash = '0x' + data.slice(64, 128)
-    const tokenId = '0x' + data.slice(128, 192)
+
+    // Get tokenId from Transfer event in same tx
+    const receipt = await rpc('eth_getTransactionReceipt', [log.transactionHash])
+    const transferLog = receipt.logs.find(l => l.topics[0] === TRANSFER_TOPIC)
+    const tokenId = transferLog ? transferLog.topics[3] : null
 
     const block = await rpc('eth_getBlockByNumber', [log.blockNumber, false])
     claims.push({
       paperId,
       recipient,
       emailHash,
+      tokenId,
       txHash: log.transactionHash,
       timestamp: new Date(parseInt(block.timestamp, 16) * 1000).toISOString()
     })
