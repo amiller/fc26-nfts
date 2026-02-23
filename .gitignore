@@ -1,4 +1,12 @@
 out/
 cache/
-images/test.png
 papers_private.json
+images/*.png
+artist_briefs.md
+artist_briefs_raw.json
+generate_images.py
+extract_metadata.py
+upload_pinata.py
+register_papers.py
+ipfs_mapping.json
+HANDOFF.md
