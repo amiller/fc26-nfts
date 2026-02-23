@@ -31,6 +31,7 @@ h1 { color: #58a6ff; font-size: 1.5em; margin-bottom: 4px; }
 .paper-session { color: #8b949e; font-size: 0.75em; }
 .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
 .badge.claimed { background: #1b4332; color: #7ee787; }
+.badge.partial { background: #2d2000; color: #e3b341; }
 .badge.open { background: #1c1d21; color: #8b949e; border: 1px solid #30363d; }
 .session-header { color: #8b949e; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #21262d; }
 
@@ -86,7 +87,7 @@ input:focus { outline: none; border-color: #58a6ff; }
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
 const IMG_DIR = "images/composited/";
-let papers = [], claims = {}, ipfsMap = {}, selectedPaper = null;
+let papers = [], claimsByPaper = {}, ipfsMap = {}, selectedPaper = null;
 
 async function sha256hex(str) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
@@ -101,7 +102,7 @@ async function load() {
   ipfsMap = await iRes.json();
   if (cRes && cRes.ok) {
     const data = await cRes.json();
-    for (const c of data.claims) claims[c.paperId] = c;
+    for (const c of data.claims) (claimsByPaper[c.paperId] ||= []).push(c);
     document.getElementById("updated").textContent = `Claims updated ${new Date(data.updatedAt).toLocaleString()}`;
   }
   renderStats();
@@ -110,25 +111,40 @@ async function load() {
 }
 
 function renderStats() {
-  const claimed = Object.keys(claims).length;
+  const totalHashes = papers.reduce((n, p) => n + (p.email_hashes || []).length, 0);
+  const totalClaimed = Object.values(claimsByPaper).reduce((n, arr) => n + arr.length, 0);
   document.getElementById("stats").innerHTML = `
     <div class="stat"><div class="stat-value">${papers.length}</div><div class="stat-label">Papers</div></div>
-    <div class="stat"><div class="stat-value">${claimed}</div><div class="stat-label">Claimed</div></div>
-    <div class="stat"><div class="stat-value">${papers.length - claimed}</div><div class="stat-label">Available</div></div>
+    <div class="stat"><div class="stat-value">${totalClaimed}</div><div class="stat-label">NFTs Minted</div></div>
+    <div class="stat"><div class="stat-value">${totalHashes}</div><div class="stat-label">Eligible Authors</div></div>
   `;
 }
 
 function paperCard(p, clickable) {
-  const c = claims[p.id];
+  const pc = claimsByPaper[p.id] || [];
+  const numHashes = (p.email_hashes || []).length;
   const img = `${IMG_DIR}${p.id}.png`;
-  const badge = c ? `<span class="badge claimed">Claimed</span>` : `<span class="badge open">Open</span>`;
-  const claimedBy = c ? `<div class="claimed-by">Minted to <a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}</a></div>` : '';
-  return `<div class="paper-card ${c ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
-    ${img ? `<img class="paper-img" src="${img}" alt="Paper #${p.id}" loading="lazy">` : '<div class="paper-img"></div>'}
+  let badge, claimedInfo = '';
+  if (pc.length === 0) {
+    badge = numHashes > 0
+      ? `<span class="badge open">${numHashes} author${numHashes > 1 ? 's' : ''} eligible</span>`
+      : `<span class="badge open">No emails yet</span>`;
+  } else if (pc.length >= numHashes && numHashes > 0) {
+    badge = `<span class="badge claimed">All ${numHashes} claimed</span>`;
+  } else {
+    badge = `<span class="badge partial">${pc.length} of ${numHashes} claimed</span>`;
+  }
+  if (pc.length > 0) {
+    claimedInfo = `<div class="claimed-by">${pc.map(c =>
+      `<a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}</a>`
+    ).join(', ')}</div>`;
+  }
+  return `<div class="paper-card ${pc.length > 0 ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
+    <img class="paper-img" src="${img}" alt="Paper #${p.id}" loading="lazy">
     <div class="paper-info">
       <div class="paper-title">#${p.id}: ${p.title} ${badge}</div>
       <div class="paper-authors">${p.authors}</div>
-      ${claimedBy}
+      ${claimedInfo}
     </div>
   </div>`;
 }
@@ -150,7 +166,9 @@ function renderGallery() {
 function renderClaimPapers() {
   let html = "";
   for (const p of papers) {
-    if (claims[p.id]) continue; // skip already claimed
+    const pc = (claimsByPaper[p.id] || []).length;
+    const nh = (p.email_hashes || []).length;
+    if (nh > 0 && pc >= nh) continue; // fully claimed
     html += paperCard(p, true);
   }
   if (!html) html = '<p style="color:#8b949e; text-align:center; padding:40px">All papers have been claimed!</p>';
