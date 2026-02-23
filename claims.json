@@ -1,0 +1,26 @@
+{
+  "claims": [
+    {
+      "paperId": 5,
+      "recipient": "0x5a370b73385085091de23e0fd21b54f2724ead8d",
+      "emailHash": "0xfcae676634b644e489ccfcbb510db38eb1a90df6bb7ab3efd0b95a9d46af251d",
+      "txHash": "0xa0d9bd61dfb6ac9f9b782af4c6b96a5cf835bf030c2bae73c27dc94208f826eb",
+      "timestamp": "2026-02-23T01:32:02.000Z"
+    },
+    {
+      "paperId": 26,
+      "recipient": "0x5a370b73385085091de23e0fd21b54f2724ead8d",
+      "emailHash": "0xfcae676634b644e489ccfcbb510db38eb1a90df6bb7ab3efd0b95a9d46af251d",
+      "txHash": "0x90c398706aba83d563e5d6a23e273b1ba20207f8174663984e304efef3387f48",
+      "timestamp": "2026-02-23T01:51:44.000Z"
+    }
+  ],
+  "claimedPaperIds": [
+    5,
+    26
+  ],
+  "stats": {
+    "totalClaims": 2
+  },
+  "updatedAt": "2026-02-23T02:10:01.982Z"
+}

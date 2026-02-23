@@ -3,94 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FC'26 Rump Session NFT — Claim</title>
+<title>FC'26 Rump Session NFT</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.5; }
-h1 { font-size: 1.4em; margin-bottom: 4px; }
-.subtitle { color: #666; margin-bottom: 24px; font-size: 0.95em; }
-.paper { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.15s; }
-.paper:hover { border-color: #999; }
-.paper.selected { border-color: #0969da; background: #f0f7ff; }
-.paper .title { font-weight: 600; font-size: 0.95em; }
-.paper .meta { color: #666; font-size: 0.85em; margin-top: 2px; }
-.session-group { margin-top: 20px; }
-.session-group h3 { font-size: 0.85em; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #eee; }
-#claim-form { display: none; margin-top: 24px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa; }
-#claim-form h2 { font-size: 1.1em; margin-bottom: 12px; }
-label { display: block; font-size: 0.9em; font-weight: 500; margin-bottom: 4px; margin-top: 12px; }
-input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95em; }
-input:focus { outline: none; border-color: #0969da; }
-#check-btn { margin-top: 16px; padding: 10px 20px; background: #0969da; color: white; border: none; border-radius: 6px; font-size: 0.95em; cursor: pointer; }
-#check-btn:hover { background: #0758b3; }
-#check-btn:disabled { background: #ccc; cursor: default; }
-#result { margin-top: 16px; padding: 14px; border-radius: 6px; display: none; }
-#result.success { background: #dff6dd; border: 1px solid #9be09b; }
-#result.error { background: #ffeef0; border: 1px solid #f0b8c0; }
-#result a { color: #0969da; font-weight: 500; }
-.info { color: #666; font-size: 0.85em; margin-top: 8px; }
+body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #0d1117; color: #c9d1d9; line-height: 1.5; }
+h1 { color: #58a6ff; font-size: 1.5em; margin-bottom: 4px; }
+.subtitle { color: #8b949e; margin-bottom: 24px; }
+.stats { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.stat { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 12px 20px; }
+.stat-value { font-size: 24px; font-weight: 700; color: #58a6ff; }
+.stat-label { font-size: 12px; color: #8b949e; }
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.tab { background: #21262d; border: 1px solid #30363d; border-radius: 6px; padding: 8px 16px; cursor: pointer; color: #c9d1d9; font-size: 14px; }
+.tab.active { background: #238636; border-color: #238636; }
+.section { display: none; }
+.section.active { display: block; }
+
+.paper-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s; display: flex; gap: 14px; align-items: center; }
+.paper-card:hover { border-color: #58a6ff; }
+.paper-card.selected { border-color: #58a6ff; background: #1c2333; }
+.paper-card.claimed { border-left: 3px solid #7ee787; }
+.paper-img { width: 64px; height: 64px; border-radius: 6px; object-fit: cover; background: #21262d; flex-shrink: 0; }
+.paper-info { flex: 1; min-width: 0; }
+.paper-title { font-weight: 600; font-size: 0.9em; color: #f0f6fc; }
+.paper-authors { color: #8b949e; font-size: 0.8em; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.paper-session { color: #8b949e; font-size: 0.75em; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
+.badge.claimed { background: #1b4332; color: #7ee787; }
+.badge.open { background: #1c1d21; color: #8b949e; border: 1px solid #30363d; }
+.session-header { color: #8b949e; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #21262d; }
+
+#claim-form { display: none; margin-top: 20px; padding: 20px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+#claim-form h2 { font-size: 1em; color: #f0f6fc; margin-bottom: 12px; }
+label { display: block; font-size: 0.85em; color: #8b949e; margin-bottom: 4px; margin-top: 12px; }
+input { width: 100%; padding: 8px 10px; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #c9d1d9; font-size: 0.9em; }
+input:focus { outline: none; border-color: #58a6ff; }
+#check-btn { margin-top: 16px; padding: 10px 20px; background: #238636; color: white; border: none; border-radius: 6px; font-size: 0.9em; cursor: pointer; font-weight: 500; }
+#check-btn:hover { background: #2ea043; }
+#result { margin-top: 14px; padding: 12px; border-radius: 6px; display: none; font-size: 0.9em; }
+#result.success { background: #1b4332; border: 1px solid #2ea043; color: #7ee787; }
+#result.error { background: #3d1f28; border: 1px solid #da3633; color: #f85149; }
+#result a { color: #58a6ff; }
+.info { color: #8b949e; font-size: 0.8em; margin-top: 6px; }
+.claimed-by { font-size: 0.8em; color: #7ee787; margin-top: 4px; }
+.claimed-by a { color: #58a6ff; text-decoration: none; font-family: monospace; font-size: 0.95em; }
+.updated { text-align: center; color: #484f58; font-size: 11px; margin-top: 24px; }
 </style>
 </head>
 <body>
 
 <h1>FC'26 Rump Session NFT</h1>
-<p class="subtitle">Claim your paper author NFT. Select your paper, then verify your email to mint.</p>
+<p class="subtitle">Unofficial paper author NFTs for FC 2026. Prove email authorship via ZK-TLS to claim yours.</p>
 
-<div id="papers-list">Loading papers...</div>
+<div class="stats" id="stats"></div>
 
-<div id="claim-form">
-  <h2 id="selected-title"></h2>
-  <label for="email">Your author email</label>
-  <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
-  <label for="recipient">Recipient ETH address</label>
-  <input type="text" id="recipient" placeholder="0x..." pattern="0x[a-fA-F0-9]{40}">
-  <p class="info">The address that will receive the NFT on Base Sepolia.</p>
-  <button id="check-btn" onclick="checkAndGenerate()">Check eligibility</button>
-  <div id="result"></div>
+<div class="tabs">
+  <div class="tab active" data-tab="gallery">Gallery</div>
+  <div class="tab" data-tab="claim">Claim</div>
 </div>
+
+<div id="gallery" class="section active"></div>
+<div id="claim" class="section">
+  <p style="color:#8b949e; margin-bottom:16px">Select a paper, enter your author email to verify eligibility, then open a GitHub issue to start the claim.</p>
+  <div id="claim-papers"></div>
+  <div id="claim-form">
+    <h2 id="selected-title"></h2>
+    <label for="email">Your author email</label>
+    <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+    <label for="recipient">Recipient ETH address</label>
+    <input type="text" id="recipient" placeholder="0x..." pattern="0x[a-fA-F0-9]{40}">
+    <p class="info">The address that will receive the NFT on Base Sepolia.</p>
+    <button id="check-btn" onclick="checkAndGenerate()">Check eligibility</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+<div class="updated" id="updated"></div>
 
 <script>
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
-let papers = [];
-let selectedPaper = null;
+const IPFS_GW = "https://gateway.pinata.cloud/ipfs/";
+let papers = [], claims = {}, ipfsMap = {}, selectedPaper = null;
 
 async function sha256hex(str) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function loadPapers() {
-  const res = await fetch("papers.json");
-  papers = await res.json();
-  render();
+async function load() {
+  const [pRes, cRes, iRes] = await Promise.all([
+    fetch("papers.json"), fetch("claims.json").catch(() => null), fetch("ipfs_mapping.json")
+  ]);
+  papers = await pRes.json();
+  ipfsMap = await iRes.json();
+  if (cRes && cRes.ok) {
+    const data = await cRes.json();
+    for (const c of data.claims) claims[c.paperId] = c;
+    document.getElementById("updated").textContent = `Claims updated ${new Date(data.updatedAt).toLocaleString()}`;
+  }
+  renderStats();
+  renderGallery();
+  renderClaimPapers();
 }
 
-function render() {
+function renderStats() {
+  const claimed = Object.keys(claims).length;
+  document.getElementById("stats").innerHTML = `
+    <div class="stat"><div class="stat-value">${papers.length}</div><div class="stat-label">Papers</div></div>
+    <div class="stat"><div class="stat-value">${claimed}</div><div class="stat-label">Claimed</div></div>
+    <div class="stat"><div class="stat-value">${papers.length - claimed}</div><div class="stat-label">Available</div></div>
+  `;
+}
+
+function paperCard(p, clickable) {
+  const c = claims[p.id];
+  const img = ipfsMap[p.id] ? IPFS_GW + ipfsMap[p.id].image_cid : '';
+  const badge = c ? `<span class="badge claimed">Claimed</span>` : `<span class="badge open">Open</span>`;
+  const claimedBy = c ? `<div class="claimed-by">Minted to <a href="https://sepolia.basescan.org/tx/${c.txHash}" target="_blank">${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}</a></div>` : '';
+  return `<div class="paper-card ${c ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
+    ${img ? `<img class="paper-img" src="${img}" alt="Paper #${p.id}" loading="lazy">` : '<div class="paper-img"></div>'}
+    <div class="paper-info">
+      <div class="paper-title">#${p.id}: ${p.title} ${badge}</div>
+      <div class="paper-authors">${p.authors}</div>
+      ${claimedBy}
+    </div>
+  </div>`;
+}
+
+function renderGallery() {
   const groups = {};
   for (const p of papers) {
     const key = p.session ? `Session ${p.session.number}: ${p.session.title}` : "Other";
     (groups[key] ||= []).push(p);
   }
-
   let html = "";
   for (const [session, plist] of Object.entries(groups)) {
-    html += `<div class="session-group"><h3>${session}</h3>`;
-    for (const p of plist) {
-      html += `<div class="paper" data-id="${p.id}" onclick="selectPaper(${p.id})">
-        <div class="title">#${p.id}: ${p.title}</div>
-        <div class="meta">${p.authors}</div>
-      </div>`;
-    }
-    html += `</div>`;
+    html += `<div class="session-header">${session}</div>`;
+    for (const p of plist) html += paperCard(p, false);
   }
-  document.getElementById("papers-list").innerHTML = html;
+  document.getElementById("gallery").innerHTML = html;
+}
+
+function renderClaimPapers() {
+  let html = "";
+  for (const p of papers) {
+    if (claims[p.id]) continue; // skip already claimed
+    html += paperCard(p, true);
+  }
+  if (!html) html = '<p style="color:#8b949e; text-align:center; padding:40px">All papers have been claimed!</p>';
+  document.getElementById("claim-papers").innerHTML = html;
 }
 
 function selectPaper(id) {
   selectedPaper = papers.find(p => p.id === id);
-  document.querySelectorAll(".paper").forEach(el => el.classList.remove("selected"));
-  document.querySelector(`.paper[data-id="${id}"]`).classList.add("selected");
+  document.querySelectorAll("#claim-papers .paper-card").forEach(el => el.classList.remove("selected"));
+  const el = document.querySelector(`#claim-papers .paper-card[data-id="${id}"]`);
+  if (el) el.classList.add("selected");
   document.getElementById("selected-title").textContent = `#${id}: ${selectedPaper.title}`;
   document.getElementById("claim-form").style.display = "block";
   document.getElementById("result").style.display = "none";
@@ -104,12 +173,12 @@ async function checkAndGenerate() {
 
   if (!email || !email.includes("@")) {
     result.className = "error"; result.style.display = "block";
-    result.textContent = "Please enter a valid email address.";
+    result.textContent = "Enter a valid email address.";
     return;
   }
   if (!recipient.match(/^0x[a-f0-9]{40}$/)) {
     result.className = "error"; result.style.display = "block";
-    result.textContent = "Please enter a valid Ethereum address (0x + 40 hex chars).";
+    result.textContent = "Enter a valid Ethereum address (0x + 40 hex chars).";
     return;
   }
 
@@ -118,7 +187,7 @@ async function checkAndGenerate() {
 
   if (!hashes.includes(hash)) {
     result.className = "error"; result.style.display = "block";
-    result.innerHTML = "This email is not registered as an author of this paper. Check the address or contact the organizer.";
+    result.innerHTML = "This email is not registered as an author of this paper.";
     return;
   }
 
@@ -127,10 +196,20 @@ async function checkAndGenerate() {
   const url = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}`;
 
   result.className = "success"; result.style.display = "block";
-  result.innerHTML = `Email verified locally (hash match). <a href="${url}" target="_blank">Open GitHub issue to start the claim →</a><br><span class="info">A verification email will be sent to you. Reply with the code to mint your NFT.</span>`;
+  result.innerHTML = `Email matches! <a href="${url}" target="_blank">Open GitHub issue to claim &rarr;</a><br><span class="info">A verification email will be sent to you. Reply with the code to mint your NFT.</span>`;
 }
 
-loadPapers();
+// Tabs
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
+  });
+});
+
+load();
 </script>
 </body>
 </html>

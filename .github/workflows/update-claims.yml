@@ -1,0 +1,31 @@
+name: Update Claims
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['Paper NFT Verify']
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch claims from chain
+        run: node scripts/update-claims.js
+        env:
+          PAPER_NFT_ADDRESS: ${{ vars.PAPER_NFT_ADDRESS }}
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add claims.json
+          git diff --staged --quiet || git commit -m "Update claims.json [skip ci]" && git push
