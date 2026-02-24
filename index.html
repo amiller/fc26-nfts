@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Book Antiqua", "Palatino Linotype", "Times New Roman", Times, serif; background: url('exptextb.jpg') repeat; color: #000000; line-height: 1.5; }
+body { font-family: "Book Antiqua", "Palatino Linotype", "Times New Roman", Times, serif; background: url('exptextb.jpg') repeat; color: #000000; line-height: 1.5; overflow-x: hidden; }
 a { color: #006600; }
 a:visited { color: #669966; }
 a:active { color: #990000; }
@@ -62,7 +62,7 @@ a:active { color: #990000; }
 .paper-card.claimed { border-left: 4px solid #006600; }
 .paper-img { width: 56px; height: 56px; border: 1px solid #a08060; object-fit: cover; flex-shrink: 0; }
 .paper-info { flex: 1; min-width: 0; }
-.paper-title { font-weight: 600; font-size: 0.9em; color: #000; }
+.paper-title { font-weight: 600; font-size: 0.9em; color: #000; overflow-wrap: break-word; word-wrap: break-word; }
 .paper-authors { color: #555; font-size: 0.8em; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .badge { display: inline-block; font-size: 11px; padding: 1px 8px; font-weight: 500; border: 1px solid; }
 .badge.claimed { background: #d4edda; color: #006600; border-color: #006600; }
@@ -98,9 +98,14 @@ input:focus { outline: 2px solid #006600; }
   .main-layout { flex-direction: column; }
   .sidebar { flex-direction: row; flex-wrap: wrap; width: 100%; }
   .nav-btn { width: auto; flex: 1; min-width: 100px; height: 40px; line-height: 40px; font-size: 12px; }
+  .page-wrap { padding: 10px; }
+  .banner h1 { font-size: 20px; }
+  .banner-sub { font-size: 13px; }
   .paper-card { gap: 8px; padding: 8px; }
   .paper-img { width: 40px; height: 40px; }
   .paper-title { font-size: 0.8em; }
+  .badge { font-size: 9px; padding: 1px 4px; }
+  .howbox { padding: 10px 12px; font-size: 0.85em; }
 }
 </style>
 </head>
