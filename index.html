@@ -56,7 +56,7 @@ a:active { color: #990000; }
 .section.active { display: block; }
 
 /* Paper cards - retro styled */
-.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; display: flex; gap: 12px; align-items: center; }
+.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; display: flex; gap: 12px; align-items: center; max-width: 100%; overflow: hidden; box-sizing: border-box; }
 .paper-card:hover { background: #efe5cc; border-color: #806030; }
 .paper-card.selected { background: #e8dab8; border-color: #660033; }
 .paper-card.claimed { border-left: 4px solid #006600; }
@@ -98,6 +98,9 @@ input:focus { outline: 2px solid #006600; }
   .main-layout { flex-direction: column; }
   .sidebar { flex-direction: row; flex-wrap: wrap; width: 100%; }
   .nav-btn { width: auto; flex: 1; min-width: 100px; height: 40px; line-height: 40px; font-size: 12px; }
+  .paper-card { gap: 8px; padding: 8px; }
+  .paper-img { width: 40px; height: 40px; }
+  .paper-title { font-size: 0.8em; }
 }
 </style>
 </head>
