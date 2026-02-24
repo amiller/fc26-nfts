@@ -108,7 +108,7 @@ input:focus { outline: 2px solid #006600; }
 <div class="banner">
   <h1>Financial Cryptography '26 Rump Session NFT</h1>
 </div>
-<p class="banner-sub">Unofficial Paper Author NFTs &middot; FC 2026, Miyakojima, Japan</p>
+<p class="banner-sub">Unofficial Paper Author NFTs &middot; FC 2026, St. Kitts</p>
 
 <div class="main-layout">
 <div class="sidebar">
@@ -146,19 +146,19 @@ input:focus { outline: 2px solid #006600; }
   <div class="howbox">
     <strong>How this works:</strong>
     Each FC'26 rump session paper has an NFT that authors can claim by proving they control an email address listed on the paper.
-    The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc">ZK-TLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions &mdash; no trusted server required.
+    The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc">ZK-TLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions &mdash; a low-authority design where the workflow can route emails but cannot forge claims.
     <ol>
       <li>Select your paper and enter your email &mdash; checked locally against a hash</li>
       <li>Open a GitHub issue containing only your email's hash (not your email)</li>
-      <li>A GitHub Action sends a verification code to your email</li>
-      <li>Reply with the code &mdash; the action generates a ZK proof and mints your NFT on Base Sepolia</li>
+      <li>A GitHub Action resolves the hash to an email address (via a GitHub secret) and sends a verification code</li>
+      <li>Reply with the code &mdash; the action generates a Sigstore-attested certificate binding your email to the proof, then mints your NFT on Base Sepolia. The on-chain contract verifies both that the email matches the attested certificate and that it's a registered author for that paper.</li>
     </ol>
   </div>
 
   <h3 style="color:#660033; margin: 16px 0 8px;">Email Challenge Protocol</h3>
 
   <div class="protocol-diagram">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" width="720" height="480">
       <defs>
         <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
           <path d="M0,0 L8,3 L0,6" fill="#654321"/>
@@ -168,8 +168,8 @@ input:focus { outline: 2px solid #006600; }
           <rect width="1" height="1" fill="#efe5cc" x="2" y="1"/>
         </pattern>
       </defs>
-      <rect width="720" height="420" fill="url(#parch)" rx="4"/>
-      <rect x="1" y="1" width="718" height="418" fill="none" stroke="#a08060" stroke-width="2" rx="4"/>
+      <rect width="720" height="480" fill="url(#parch)" rx="4"/>
+      <rect x="1" y="1" width="718" height="478" fill="none" stroke="#a08060" stroke-width="2" rx="4"/>
 
       <!-- Title -->
       <text x="360" y="28" text-anchor="middle" font-family="Book Antiqua, serif" font-size="15" font-weight="bold" fill="#660033">Email Challenge &amp; NFT Mint Protocol</text>
@@ -188,10 +188,10 @@ input:focus { outline: 2px solid #006600; }
       <text x="660" y="63" text-anchor="middle" font-family="Book Antiqua, serif" font-size="13" fill="#fff" font-weight="bold">Chain</text>
 
       <!-- Lifelines -->
-      <line x1="90" y1="74" x2="90" y2="400" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
-      <line x1="300" y1="74" x2="300" y2="400" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
-      <line x1="500" y1="74" x2="500" y2="400" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
-      <line x1="660" y1="74" x2="660" y2="400" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="90" y1="74" x2="90" y2="460" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="300" y1="74" x2="300" y2="460" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="500" y1="74" x2="500" y2="460" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="660" y1="74" x2="660" y2="460" stroke="#a08060" stroke-width="1" stroke-dasharray="4,3"/>
 
       <!-- Step 1: Author enters email -->
       <line x1="90" y1="100" x2="290" y2="100" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
@@ -212,38 +212,49 @@ input:focus { outline: 2px solid #006600; }
       <circle cx="20" cy="160" r="10" fill="#660033"/>
       <text x="20" y="164" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">3</text>
 
-      <!-- Step 4: Action resolves hash, sends email -->
-      <rect x="455" y="195" width="90" height="24" fill="#efe5cc" stroke="#a08060" stroke-width="1" rx="2"/>
-      <text x="500" y="211" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">resolve hash</text>
-      <line x1="500" y1="230" x2="100" y2="230" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="300" y="224" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">Verification code via SES email</text>
-      <circle cx="20" cy="230" r="10" fill="#660033"/>
-      <text x="20" y="234" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">4</text>
+      <!-- Step 4: Action resolves hash via secret, sends email -->
+      <rect x="440" y="180" width="120" height="36" fill="#efe5cc" stroke="#a08060" stroke-width="1" rx="2"/>
+      <text x="500" y="195" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">EMAIL_LOOKUP secret</text>
+      <text x="500" y="207" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">hash → email</text>
+      <line x1="500" y1="228" x2="100" y2="228" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="300" y="222" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">Verification code via SES email</text>
+      <circle cx="20" cy="228" r="10" fill="#660033"/>
+      <text x="20" y="232" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">4</text>
 
       <!-- Step 5: Author replies with code -->
-      <line x1="90" y1="265" x2="490" y2="265" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="290" y="259" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">Issue comment: verification code</text>
-      <circle cx="20" cy="265" r="10" fill="#660033"/>
-      <text x="20" y="269" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">5</text>
+      <line x1="90" y1="260" x2="490" y2="260" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="290" y="254" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">Issue comment: verification code</text>
+      <circle cx="20" cy="260" r="10" fill="#660033"/>
+      <text x="20" y="264" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">5</text>
 
-      <!-- Step 6: ZK proof generation -->
-      <rect x="452" y="280" width="96" height="36" fill="#d4edda" stroke="#006600" stroke-width="1" rx="2"/>
-      <text x="500" y="295" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#006600" font-weight="bold">ZK Proof</text>
-      <text x="500" y="308" text-anchor="middle" font-family="monospace" font-size="8" fill="#006600">Sigstore attested</text>
+      <!-- Step 6: Attested certificate + ZK proof -->
+      <rect x="440" y="278" width="120" height="48" fill="#d4edda" stroke="#006600" stroke-width="1" rx="2"/>
+      <text x="500" y="293" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#006600" font-weight="bold">Sigstore attestation</text>
+      <text x="500" y="306" text-anchor="middle" font-family="monospace" font-size="8" fill="#006600">cert binds email</text>
+      <text x="500" y="318" text-anchor="middle" font-family="monospace" font-size="8" fill="#006600">to commit + proof</text>
       <circle cx="20" cy="298" r="10" fill="#660033"/>
       <text x="20" y="302" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">6</text>
 
-      <!-- Step 7: Mint on chain -->
-      <line x1="500" y1="330" x2="650" y2="330" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="575" y="324" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">mint(proof, recipient)</text>
-      <circle cx="20" cy="330" r="10" fill="#660033"/>
-      <text x="20" y="334" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">7</text>
+      <!-- Step 7: Claim on chain -->
+      <line x1="500" y1="340" x2="650" y2="340" stroke="#654321" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="575" y="334" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">claim(proof, email,</text>
+      <text x="575" y="346" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">cert, recipient)</text>
+      <circle cx="20" cy="340" r="10" fill="#660033"/>
+      <text x="20" y="344" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">7</text>
 
-      <!-- Step 8: NFT minted -->
-      <rect x="620" y="345" width="80" height="24" fill="#d4edda" stroke="#006600" stroke-width="1" rx="2"/>
-      <text x="660" y="361" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#006600" font-weight="bold">NFT Minted!</text>
-      <line x1="650" y1="380" x2="100" y2="380" stroke="#006600" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="6,3"/>
-      <text x="375" y="395" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#006600">ERC-721 token on Base Sepolia</text>
+      <!-- Step 8: Contract verifies -->
+      <rect x="615" y="360" width="90" height="48" fill="#efe5cc" stroke="#a08060" stroke-width="1" rx="2"/>
+      <text x="660" y="375" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">verify proof</text>
+      <text x="660" y="387" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">email in cert?</text>
+      <text x="660" y="399" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">email registered?</text>
+      <circle cx="20" cy="380" r="10" fill="#660033"/>
+      <text x="20" y="384" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">8</text>
+
+      <!-- Step 9: NFT minted -->
+      <rect x="625" y="416" width="70" height="22" fill="#d4edda" stroke="#006600" stroke-width="1" rx="2"/>
+      <text x="660" y="431" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#006600" font-weight="bold">NFT Minted!</text>
+      <line x1="650" y1="446" x2="100" y2="446" stroke="#006600" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="6,3"/>
+      <text x="375" y="460" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#006600">ERC-721 token on Base Sepolia</text>
     </svg>
   </div>
 </div>
