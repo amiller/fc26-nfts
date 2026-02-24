@@ -314,8 +314,8 @@ function paperCard(p, clickable) {
   if (pc.length > 0) {
     claimedInfo = `<div class="claimed-by">${pc.map(c => {
       const addr = `${c.recipient.slice(0,6)}...${c.recipient.slice(-4)}`;
-      const nftLink = c.tokenId ? `<a href="${BLOCKSCOUT}/token/${CONTRACT}/instance/${BigInt(c.tokenId)}" target="_blank" title="View NFT on Blockscout">&#x1f5bc;</a> ` : '';
-      return `${nftLink}<a href="${BLOCKSCOUT}/tx/${c.txHash}" target="_blank">${addr}</a>`;
+      const link = c.tokenId ? `${BLOCKSCOUT}/token/${CONTRACT}/instance/${BigInt(c.tokenId)}` : `${BLOCKSCOUT}/tx/${c.txHash}`;
+      return `<a href="${link}" target="_blank">${addr}</a>`;
     }).join(', ')}</div>`;
   }
   return `<div class="paper-card ${pc.length > 0 ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
