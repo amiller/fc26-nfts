@@ -148,8 +148,8 @@ input:focus { outline: 2px solid #006600; }
     Each FC'26 rump session paper has an NFT that authors can claim by proving they control an email address listed on the paper.
     The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc#fd334b">ZK-TLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions &mdash; no trusted server required.
     <ol>
-      <li>Select your paper and enter your email &mdash; checked <em>locally</em> against a hash, never leaves your browser</li>
-      <li>Open a GitHub issue containing only your email's hash (not the email itself)</li>
+      <li>Select your paper and enter your email &mdash; checked locally against a hash</li>
+      <li>Open a GitHub issue containing only your email's hash (not your email)</li>
       <li>A GitHub Action sends a verification code to your email</li>
       <li>Reply with the code &mdash; the action generates a ZK proof and mints your NFT on Base Sepolia</li>
     </ol>
@@ -211,10 +211,6 @@ input:focus { outline: 2px solid #006600; }
       <text x="395" y="154" text-anchor="middle" font-family="Book Antiqua, serif" font-size="11" fill="#333">GitHub Issue: {paper_id, email_hash, recipient}</text>
       <circle cx="20" cy="160" r="10" fill="#660033"/>
       <text x="20" y="164" text-anchor="middle" font-family="Book Antiqua, serif" font-size="10" fill="#fff" font-weight="bold">3</text>
-
-      <!-- Note: no plaintext -->
-      <rect x="325" y="168" width="140" height="18" fill="#fff3cd" stroke="#856404" stroke-width="0.5" rx="2"/>
-      <text x="395" y="181" text-anchor="middle" font-family="Book Antiqua, serif" font-size="9" fill="#856404" font-style="italic">email never leaves browser</text>
 
       <!-- Step 4: Action resolves hash, sends email -->
       <rect x="455" y="195" width="90" height="24" fill="#efe5cc" stroke="#a08060" stroke-width="1" rx="2"/>
