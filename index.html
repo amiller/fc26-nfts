@@ -33,7 +33,7 @@ a:active { color: #990000; }
 .nav-btn:hover, .nav-btn:visited { color: #fff; }
 .nav-btn:hover { background: linear-gradient(180deg, #c8b08a 0%, #9B8365 30%, #7B6345 70%, #9B8365 100%); }
 .nav-btn.active { background: linear-gradient(180deg, #d0b890 0%, #A08050 30%, #806030 70%, #A08050 100%); border-style: inset; }
-.content { flex: 1; min-width: 0; }
+.content { flex: 1; min-width: 0; max-width: 100%; overflow: hidden; }
 
 /* Stats bar */
 .stats { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -56,13 +56,13 @@ a:active { color: #990000; }
 .section.active { display: block; }
 
 /* Paper cards - retro styled */
-.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; display: flex; gap: 12px; align-items: center; max-width: 100%; overflow: hidden; box-sizing: border-box; }
+.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; max-width: 100%; box-sizing: border-box; }
 .paper-card:hover { background: #efe5cc; border-color: #806030; }
 .paper-card.selected { background: #e8dab8; border-color: #660033; }
 .paper-card.claimed { border-left: 4px solid #006600; }
 .paper-img { width: 56px; height: 56px; border: 1px solid #a08060; object-fit: cover; flex-shrink: 0; }
 .paper-info { flex: 1; min-width: 0; }
-.paper-title { font-weight: 600; font-size: 0.9em; color: #000; overflow-wrap: break-word; word-wrap: break-word; }
+.paper-title { font-weight: 600; font-size: 0.9em; color: #000; overflow-wrap: break-word; word-wrap: break-word; max-width: 100%; }
 .paper-authors { color: #555; font-size: 0.8em; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .badge { display: inline-block; font-size: 11px; padding: 1px 8px; font-weight: 500; border: 1px solid; }
 .badge.claimed { background: #d4edda; color: #006600; border-color: #006600; }
@@ -104,7 +104,7 @@ input:focus { outline: 2px solid #006600; }
   .paper-card { gap: 8px; padding: 8px; }
   .paper-img { width: 40px; height: 40px; }
   .paper-title { font-size: 0.8em; }
-  .badge { font-size: 9px; padding: 1px 4px; }
+  .badge { font-size: 9px; padding: 1px 4px; display: block; margin-top: 2px; width: fit-content; }
   .howbox { padding: 10px 12px; font-size: 0.85em; }
   .howbox ol { margin-left: 16px; }
 }
