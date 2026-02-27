@@ -19,7 +19,7 @@ There is nothing privileged about this repository. The verification workflow use
 
 - A **pinned prover image** (`sha256:d85e563...`) that generates ZK proofs — anyone can inspect or run it
 - **[Sigstore](https://www.sigstore.dev/) attestation** tied to the GitHub Actions run, providing a transparent audit trail
-- A **public smart contract** on Base Sepolia ([`0x3a9a...f2f1`](https://sepolia.basescan.org/address/0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1)) that verifies proofs on-chain
+- A **public smart contract** on Base Sepolia ([`0x101D...e9B4`](https://sepolia.basescan.org/address/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4)) that verifies proofs on-chain
 
 Anyone with the same commit, a prover image, and an SES key can independently run this workflow. The ZK proof is verifiable by anyone against the on-chain verifier.
 
@@ -34,14 +34,14 @@ Anyone with the same commit, a prover image, and an SES key can independently ru
 
 [`contracts/PaperNFT.sol`](contracts/PaperNFT.sol) — ERC-721, one NFT per (paper, author_email) pair.
 
-- **Address:** [`0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1`](https://sepolia.basescan.org/address/0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1) (Base Sepolia)
+- **Address:** [`0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4`](https://sepolia.basescan.org/address/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4) (Base Sepolia)
 - Reuses [SigstoreVerifier](https://sepolia.basescan.org/address/0xbD08fd15E893094Ad3191fdA0276Ac880d0FA3e1) from [github-zktls](https://github.com/amiller/github-zktls)
 - Owner registers papers with authorized email hashes
 - `tokenURI` returns IPFS metadata with AI-generated artwork
 
 ## Missing emails
 
-Not all author emails could be extracted from the preproceedings PDFs (22 of 46 papers are missing emails). If your paper is listed but your email isn't recognized, please [open an issue](https://github.com/amiller/fc26-nfts/issues/new?title=Missing+email+for+paper+%23___&body=My+paper+ID+is:+%0AMy+email+is:+) or contact the maintainer to get added.
+Most author emails were found from public sources (DBLP, university homepages, ePrint papers, personal websites). 44 of 46 papers have at least one email registered. If your paper is listed but your email isn't recognized, please [open an issue](https://github.com/amiller/fc26-nfts/issues/new?title=Missing+email+for+paper+%23___&body=My+paper+ID+is:+%0AMy+email+is:+) or contact the maintainer to get added.
 
 ## Scripts
 
