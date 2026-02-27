@@ -39,6 +39,22 @@ Anyone with the same commit, a prover image, and an SES key can independently ru
 - Owner registers papers with authorized email hashes
 - `tokenURI` returns IPFS metadata with AI-generated artwork
 
+## Reproducibility
+
+The contract's `requiredCommitSha` is set to the tagged release commit. Every NFT mint requires a Sigstore attestation proving the GitHub Actions workflow ran at exactly that commit. This means:
+
+1. The workflow code that minted any NFT is the code at the tagged commit
+2. Anyone can inspect the workflow source at that commit to verify what it does
+3. The full repo is archived on IPFS for permanence (see `site_cid.json`)
+
+To verify from the IPFS archive:
+```bash
+ipfs get <CID>          # download the archive
+unzip fc26-rump-session-*.zip
+cd fc26-rump-session-*/
+git log --oneline -1    # should match requiredCommitSha on-chain
+```
+
 ## Missing emails
 
 Most author emails were found from public sources (DBLP, university homepages, ePrint papers, personal websites). 44 of 46 papers have at least one email registered. If your paper is listed but your email isn't recognized, please [open an issue](https://github.com/amiller/fc26-nfts/issues/new?title=Missing+email+for+paper+%23___&body=My+paper+ID+is:+%0AMy+email+is:+) or contact the maintainer to get added.
