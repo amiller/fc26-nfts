@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: v1.0.0
 
       - name: Parse comment and cross-reference challenge
         id: meta

@@ -35,24 +35,22 @@ Anyone with the same commit, a prover image, and an SES key can independently ru
 [`contracts/PaperNFT.sol`](contracts/PaperNFT.sol) — ERC-721, one NFT per (paper, author_email) pair.
 
 - **Address:** [`0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4`](https://sepolia.basescan.org/address/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4) (Base Sepolia)
+- **Token gallery:** [Blockscout NFT page](https://base-sepolia.blockscout.com/token/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4)
 - Reuses [SigstoreVerifier](https://sepolia.basescan.org/address/0xbD08fd15E893094Ad3191fdA0276Ac880d0FA3e1) from [github-zktls](https://github.com/amiller/github-zktls)
 - Owner registers papers with authorized email hashes
 - `tokenURI` returns IPFS metadata with AI-generated artwork
 
 ## Reproducibility
 
-The contract's `requiredCommitSha` is set to the tagged release commit. Every NFT mint requires a Sigstore attestation proving the GitHub Actions workflow ran at exactly that commit. This means:
+Both workflows check out a **pinned tag** (`v1.0.0`), so the code that sends verification emails and generates ZK proofs is always the code at that tagged commit — regardless of later pushes to `main`. Each mint produces a [Sigstore](https://www.sigstore.dev/) attestation tying the proof to a specific GitHub Actions run.
 
-1. The workflow code that minted any NFT is the code at the tagged commit
-2. Anyone can inspect the workflow source at that commit to verify what it does
-3. The full repo is archived on IPFS for permanence (see `site_cid.json`)
+The full repo at the tagged release is archived on IPFS for permanence:
+- **IPFS CID:** `QmWyPvcFBqvSFbEtqQNBUzf2iqWrY251c7p4Qu3mYf9m6f` (see `site_cid.json`)
 
-To verify from the IPFS archive:
 ```bash
-ipfs get <CID>          # download the archive
-unzip fc26-rump-session-*.zip
-cd fc26-rump-session-*/
-git log --oneline -1    # should match requiredCommitSha on-chain
+ipfs get QmWyPvcFBqvSFbEtqQNBUzf2iqWrY251c7p4Qu3mYf9m6f
+unzip fc26-rump-session-v1.0.0.zip
+# inspect workflows, contract source, papers.json, etc.
 ```
 
 ## Missing emails

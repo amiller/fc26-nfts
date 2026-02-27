@@ -27,6 +27,10 @@ jobs:
     if: contains(github.event.issue.title, '[PAPER]')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.0.0
+
       - name: Parse issue
         id: parse
         uses: actions/github-script@v7
