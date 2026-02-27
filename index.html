@@ -154,8 +154,9 @@ input:focus { outline: 2px solid #006600; }
 <div id="protocol" class="section">
   <div class="howbox">
     <strong>How this works:</strong>
-    Each FC'26 rump session paper has an NFT that authors can claim by proving they control an email address listed on the paper.
-    The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc">ZK-TLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions &mdash; a low-authority design where the workflow can route emails but cannot forge claims.
+    Each FC'26 rump session paper has an NFT that authors can claim by proving they control an email address listed on the paper (or associated with the author by public records).
+    The claim flow uses <a href="https://www.overleaf.com/read/vmwnhsrmbdgc">Github-ZKTLS</a> (Sigstore attestation + ZK proofs) running entirely in GitHub Actions.
+    This is a low-authority design: not even the contract deployer can mint NFTs on your behalf, and <a href="https://github.com/amiller/fc26-nfts">the repo</a> isn't special &mdash; anyone can fork it and run the same claim workflow.
     <ol>
       <li>Select your paper and enter your email &mdash; checked locally against a hash</li>
       <li>Open a GitHub issue containing only your email's hash (not your email)</li>
@@ -272,8 +273,9 @@ input:focus { outline: 2px solid #006600; }
 </div><!-- main-layout -->
 
 <div class="footer">
-  <h5>Questions? <a href="https://github.com/amiller/fc26-nfts/issues">Open an issue</a> or contact the organizers.</h5>
-  <p style="font-size:0.75em; color:#999; margin-top:4px;">Built with nostalgia for <a href="https://fc99.ifca.ai/">FC'99</a></p>
+  <h5>Questions? <a href="https://github.com/amiller/fc26-nfts/issues">Open an issue</a> or contact the perpetrator.</h5>
+  <p style="font-size:0.75em; color:#999; margin-top:4px;">Built with borrowed nostalgia for the unremembered <a href="https://fc99.ifca.ai/">FC'99</a></p>
+  <p id="ipfs-cid" style="font-size:0.75em; color:#999; margin-top:4px;"></p>
 </div>
 <div class="updated" id="updated"></div>
 
@@ -282,7 +284,7 @@ input:focus { outline: 2px solid #006600; }
 <script>
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
-const IMG_DIR = "images/composited/";
+const IMG_DIR = "https://raw.githubusercontent.com/amiller/fc26-nfts/images/images/composited/";
 const CONTRACT = "0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1";
 const BLOCKSCOUT = "https://base-sepolia.blockscout.com";
 let papers = [], claimsByPaper = {}, selectedPaper = null;
@@ -305,6 +307,10 @@ async function load() {
   renderStats();
   renderGallery();
   renderClaimPapers();
+  fetch("site_cid.json").then(r => r.ok ? r.json() : null).then(d => {
+    if (d?.cid) document.getElementById("ipfs-cid").innerHTML =
+      `Also available at <a href="https://gateway.pinata.cloud/ipfs/${d.cid}/">ipfs://${d.cid}</a>`;
+  }).catch(() => {});
 }
 
 function renderStats() {

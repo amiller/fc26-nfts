@@ -11,8 +11,7 @@
       "69e056dcb3f8182491b7bd469b80a296b18f3a66e9de3bf83ae936f4f3708ac9",
       "3073940c75c4336737915e22007dae8ce8509f46e7d5dc8f7baa851be397830c",
       "8de1c8d7c6901f43a324eddde7bb99823edb30fa6a377f03bfe8d295397cdbdf",
-      "dd397b94053b83a5fb12f48981b7783f42bb189bfeeacc8f25dc80dff63c37dd",
-      "0eac85b56c133a6e47630a818c986221c82274f316ca789a4d52263206cbafe5"
+      "dd397b94053b83a5fb12f48981b7783f42bb189bfeeacc8f25dc80dff63c37dd"
     ]
   },
   {
@@ -40,7 +39,6 @@
       "title": "Incentives & Decentralization"
     },
     "email_hashes": [
-      "56e190fed29f58a138d3d38441d3578af7c4b4b0a4f61da55bf3026d931d92a0",
       "19e32438ee0e04737ef2175ac4cc84200b243172c344206dbbfe96b2a1fa3612"
     ]
   },
@@ -52,10 +50,7 @@
       "number": 4,
       "title": "Incentives & Decentralization"
     },
-    "email_hashes": [
-      "7ada72aa58faaf6edf9d1e0021c839e3b89b77872a9f8930732b44e965c2341d",
-      "19e32438ee0e04737ef2175ac4cc84200b243172c344206dbbfe96b2a1fa3612"
-    ]
+    "email_hashes": []
   },
   {
     "id": 26,
@@ -68,8 +63,7 @@
     "email_hashes": [
       "d63494d84333575aa564cfee97f44ef4c5186778cbd486c999bed9828b7c187f",
       "fa894496f7cf76b9e5116f46808d32955819fef610b1215c039128fdb132b3fb",
-      "2da58d2b58c53917b0c344dbeddfa3e1d6d68a11a9b81979d37e43cfc52cfc6b",
-      "0eac85b56c133a6e47630a818c986221c82274f316ca789a4d52263206cbafe5"
+      "2da58d2b58c53917b0c344dbeddfa3e1d6d68a11a9b81979d37e43cfc52cfc6b"
     ]
   },
   {
@@ -80,7 +74,10 @@
       "number": 2,
       "title": "Consensus & Smart Contracts"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "83f1b646c52e77812248ef4cad65e0a1554dfbd3ed4e0d4e2e64f2fc7a9d1254",
+      "ecfb29dfdbd5c7db486b1c70ebfbf46f1bede33f2e099daf39f33b56aa74505f"
+    ]
   },
   {
     "id": 37,
@@ -125,7 +122,10 @@
       "number": 8,
       "title": "Nonce and Key Reuse"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "b16092e3579ffc4fa985604a30c2e8f1edb93ce7ee33f127de782b159d09384d",
+      "420b81100dbcd74a06c346ca45e89cc55f94ba7399ac119f13169ab3b1242dc2"
+    ]
   },
   {
     "id": 58,
@@ -165,7 +165,9 @@
       "number": 5,
       "title": "Zero-Knowledge Proofs"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "76e8c7fd9ffd546e832352cc479e616635ec633edfa88ed27befa772ddc5e342"
+    ]
   },
   {
     "id": 95,
@@ -175,7 +177,14 @@
       "number": 2,
       "title": "Consensus & Smart Contracts"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "4696cf72af5153575f8af7563b33762c4c69be6f7ec06c3bcb3271a75a7f65cc",
+      "7928e48517d10fee085cdc9c9ad87719c6fc614d05e14d669242a8eb62e24524",
+      "6ba43a314a4e9956dee8390795007690b39a59ab0a29c5a5808fac7bb360597a",
+      "a370d96c9deb7cf936ae006e2b8edb4ffca58d5fbe6e3187eba787532cca6721",
+      "eb22695cbcc74aee952ea2ef6e2b1f1e9df6c583b459ed98cc14b2ec224b94b7",
+      "5aab5714084b2a27c52e4babc83ffa25ec4d9bd8eb479cf2d64b5b65a9ffdc53"
+    ]
   },
   {
     "id": 104,
@@ -185,7 +194,13 @@
       "number": 2,
       "title": "Consensus & Smart Contracts"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "61e633c6d7e3910d542fd369acc207bf295c3370d821fa9c264742cba8738b14",
+      "fd1f49c8543e895fb40e4fea7dff38bf3eb5fc3805de836f89b7ce8581080c13",
+      "8ad048aecfca10d5d4d74b63af9219d297581b947e4271e1e4d1d913975dde27",
+      "4fd6687a4a7210166753fecbe1766935368cc3f09e201438326e2e12f40651e2",
+      "6812e467afeabd7c806446fd47f0733d46c77a39516fb49b4a84f253361155d4"
+    ]
   },
   {
     "id": 105,
@@ -239,7 +254,10 @@
       "number": 6,
       "title": "Threshold & Encryption"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "82ef1acd7e0cf484c5c8a3b3ea55e62b40e24dbee98bc224f61a4956652d7fa9",
+      "7099a45a6ee5fb650f4c8bef723004ea17263bfa35f2a7fee3f3e7280106b14d"
+    ]
   },
   {
     "id": 117,
@@ -294,7 +312,9 @@
       "number": 1,
       "title": "DeFi & AMMs"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "8be64f95e307afb50313803ac3612f577ebe0fcb5ca24e4eac8a59a9e3a3b877"
+    ]
   },
   {
     "id": 141,
@@ -304,7 +324,10 @@
       "number": 4,
       "title": "Incentives & Decentralization"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "66b95fac86947c0846f0acd90e9973f2e9152693a185a96cd8e6caa2fde65fcc",
+      "8937ea312b98634ac27b77004990b5328c3142fb3544393ef962df8e529cfbcc"
+    ]
   },
   {
     "id": 146,
@@ -314,7 +337,11 @@
       "number": 5,
       "title": "Zero-Knowledge Proofs"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "04fd4472c78fb1c8f2a2c2d9edb2231bc75c1985b2327d30b8007628fa04e4d6",
+      "2440a64089d09e96cf1cd40df0b234ac318ba2f303b48731bf1a0abd065ca579",
+      "ef7324e4d08644eeae3928458847b15bcfc502852dec83a03def8536dbc20596"
+    ]
   },
   {
     "id": 147,
@@ -352,7 +379,10 @@
       "number": 9,
       "title": "AI and ML Security"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "9b301e7aa8ddb3f38248abfff902dd0e6f906a5562c1de49cfdc07d3e6da0b06",
+      "c0068f4b4fdfe4025fa041b399db1d40ff7e1b3aabbdbebd184defebb7fc2964"
+    ]
   },
   {
     "id": 171,
@@ -362,7 +392,10 @@
       "number": 11,
       "title": "Consensus \u2014 Fast Finality"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "936afe9e21fcef57aace33e911bb12fdd77d32693244a33caf1fb88c9ce60a0e",
+      "dee6ecf27ce438194536e5f09fcbee7f78e4f4ba653113113970bad32b50589f"
+    ]
   },
   {
     "id": 179,
@@ -372,7 +405,11 @@
       "number": 3,
       "title": "PoS & Block Production"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "99c869e59272d4025d43934433a8cb218c3d7582ead4204ed5fdc2ee1870f4a5",
+      "ad0534c8e6c6c6032d6058d6f8e7ee0ab37fec1c724561c66b6101fd9576ae06",
+      "9a8db30cc77e10db22b1762b1e8478d4ff552fc0f327e8c2a4c848bf5437da3f"
+    ]
   },
   {
     "id": 186,
@@ -427,7 +464,10 @@
       "number": 1,
       "title": "DeFi & AMMs"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "02a73f6d8540afeb1db3b39007dfd8f59979b071406084da1b65fbee83f35e83",
+      "b97160c93bc32693fa3ca712eb46f250bc243b20ee2dd82a7cf2363b4edc1c36"
+    ]
   },
   {
     "id": 209,
@@ -453,7 +493,10 @@
       "number": 4,
       "title": "Incentives & Decentralization"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "c6b56287f3ed2a15765067f32b2fe2e94788724ba200fe835194100841937c12",
+      "b97160c93bc32693fa3ca712eb46f250bc243b20ee2dd82a7cf2363b4edc1c36"
+    ]
   },
   {
     "id": 216,
@@ -477,7 +520,10 @@
       "number": 3,
       "title": "PoS & Block Production"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "65a8556198c3774a79448391d9a058640184137106fc7e7da253e4484c314d24",
+      "faa8d9fb25c70912a45fb89e0b884f3517367ca3c32ab579110ffcac37b7558c"
+    ]
   },
   {
     "id": 223,
@@ -487,7 +533,10 @@
       "number": 7,
       "title": "Post-Quantum Cryptography"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "fbad384e1c8fc13f4b68daecfc5474e8cbcd6213d8924d99fd9fc704d5d25d67",
+      "aa85ab629c91bad34d555ee5927869faed5b74f1c8535e713d1d04722a39710b"
+    ]
   },
   {
     "id": 224,
@@ -507,7 +556,11 @@
       "number": 11,
       "title": "Consensus \u2014 Fast Finality"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "6a0f3b9e80721bb318502d2381f5bbf1632650d97738caa70ea97e53c4344ea6",
+      "663d659e3355f682f7b4f47497b23a7b65ca919082bab8bc8f9fc74a34286b01",
+      "f6e715d805533b57a4c6ae37e8de90ced78d4b273bdd5f9167fcbde8acbaffad"
+    ]
   },
   {
     "id": 231,
@@ -546,7 +599,11 @@
       "number": 5,
       "title": "Zero-Knowledge Proofs"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "86f9cb08e6a5e4d93b370160c5bbec72ebee6823a0ef9b22cdf409865d965eba",
+      "bcb6c0b6c7936f645544655c4b60e3ada39535337dc326037145998584580258",
+      "a30e9accc636ddbd07838a4c104303a41090b533e77037b96f46320baa847c72"
+    ]
   },
   {
     "id": 252,
@@ -569,7 +626,11 @@
       "number": 9,
       "title": "AI and ML Security"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "be8f016950b133e921b9ebb4cf70dfeade6208f5e7b6074b4c545a6631dd8ff7",
+      "fa9127c10490b370624e5aa7c673b3ae3c436b9c9c63ab878f73927323351eb1",
+      "1401ebe5bcf2547eb7767b2f5e7a26deae03f8331d979a513336dcc5ea68c47a"
+    ]
   },
   {
     "id": 258,
@@ -579,6 +640,8 @@
       "number": 6,
       "title": "Threshold & Encryption"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "c732ae432cb95df1ab34a3b6fa5cec6564ba5990fd3c7c18934e3c3692cf4e32"
+    ]
   }
 ]

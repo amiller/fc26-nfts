@@ -1,12 +1,28 @@
 out/
 cache/
 papers_private.json
-images/*.png
+images/
 artist_briefs.md
 artist_briefs_raw.json
+ipfs_mapping.json
+HANDOFF.md
+
+# Build tooling
 generate_images.py
+generate_border.py
+generate_seeds.py
+generate_template.py
+composite_images.py
 extract_metadata.py
 upload_pinata.py
 register_papers.py
-ipfs_mapping.json
-HANDOFF.md
+publish_ipfs.py
+
+# Build artifacts
+seeds/
+border_v*.png
+template_page_*.png
+fc_key_logo.gif
+exptextb.jpg
+site_cid.json
+tasks/
