@@ -1,42 +1,28 @@
-# FC26 Paper NFT — Email Challenge
-#
-# Phase 1: send verification code to author's email.
-# Triggered when someone opens an issue with [PAPER] in the title.
-#
-# ISSUE FORMAT:
-#   Title: [PAPER] Claim paper NFT
-#   Body:
-#     paper_id: 5
-#     email_hash: <sha256 of salt+email>
-#     recipient: 0x1234...
-#
-# REQUIRED SECRETS:
-#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, SES_FROM_EMAIL, AWS_REGION, EMAIL_LOOKUP
-
 name: Paper NFT Challenge
 
 on:
-  issues:
-    types: [opened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        required: true
+        type: string
+      issue_body:
+        required: true
+        type: string
 
 permissions:
   issues: write
 
 jobs:
   send-challenge:
-    if: contains(github.event.issue.title, '[PAPER]')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: v1.0.0
-
       - name: Parse issue
         id: parse
         uses: actions/github-script@v7
         with:
           script: |
-            const body = context.payload.issue.body || '';
+            const body = context.payload.inputs.issue_body || '';
 
             const paperMatch = body.match(/paper_id:\s*(\d+)/i);
             if (!paperMatch) {
@@ -128,6 +114,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const issueNumber = parseInt(context.payload.inputs.issue_number);
             const hash = '${{ steps.challenge.outputs.hash }}';
             const timestamp = '${{ steps.challenge.outputs.timestamp }}';
             const emailHash = '${{ steps.parse.outputs.email_hash }}';
@@ -135,7 +122,7 @@ jobs:
             const paperId = '${{ steps.parse.outputs.paper_id }}';
 
             await github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: [
@@ -158,7 +145,7 @@ jobs:
             });
 
             await github.rest.issues.addLabels({
-              issue_number: context.issue.number,
+              issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ['paper-pending']
@@ -169,8 +156,9 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const issueNumber = parseInt(context.payload.inputs.issue_number);
             await github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: issueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `## ❌ Challenge Failed\n\nCould not send verification email. Check issue format:\n\`\`\`\npaper_id: 5\nemail: user@example.com\nrecipient: 0x1234...\n\`\`\``

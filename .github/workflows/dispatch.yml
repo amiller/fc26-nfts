@@ -1,0 +1,58 @@
+# Thin dispatcher: forwards issue events to pinned workflows via workflow_dispatch.
+# This ensures email-challenge.yml and email-verify.yml run at the tagged ref,
+# so github.sha (and thus the Sigstore attestation commitSha) matches the tag.
+
+name: Dispatch
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch-challenge:
+    if: >-
+      github.event_name == 'issues' &&
+      contains(github.event.issue.title, '[PAPER]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'email-challenge.yml',
+              ref: 'v1.0.0',
+              inputs: {
+                issue_number: String(context.issue.number),
+                issue_body: context.payload.issue.body || ''
+              }
+            });
+            console.log('Dispatched email-challenge at v1.0.0');
+
+  dispatch-verify:
+    if: >-
+      github.event_name == 'issue_comment' &&
+      contains(github.event.issue.title, '[PAPER]') &&
+      github.event.comment.user.login != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'email-verify.yml',
+              ref: 'v1.0.0',
+              inputs: {
+                issue_number: String(context.issue.number),
+                comment_body: (context.payload.comment.body || '').trim()
+              }
+            });
+            console.log('Dispatched email-verify at v1.0.0');
