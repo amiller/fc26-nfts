@@ -20,7 +20,7 @@
     "authors": "Francesco D'Amato, Roberto Saltini, Thanh-Hai Tran, Yann Vonlanthen, Luca Zanolini",
     "session": {
       "number": 11,
-      "title": "Consensus \u2014 Fast Finality"
+      "title": "Consensus — Fast Finality"
     },
     "email_hashes": [
       "8f09d5a62f145bdfb655106829339a6d4562b74a0a7d79a92eaddff12809e3dc",
@@ -172,7 +172,7 @@
   {
     "id": 95,
     "title": "Bribers, Bribers on The Chain",
-    "authors": "Bence So\u00f3ki-T\u00f3th, Istv\u00e1n Andr\u00e1s Seres, Kamilla Kara, \u00c1bel Nagy, Bal\u00e1zs Pej\u00f3, Gergely Bicz\u00f3k",
+    "authors": "Bence Soóki-Tóth, István András Seres, Kamilla Kara, Ábel Nagy, Balázs Pejó, Gergely Biczók",
     "session": {
       "number": 2,
       "title": "Consensus & Smart Contracts"
@@ -262,7 +262,7 @@
   {
     "id": 117,
     "title": "Where Does MEV Really Come From?",
-    "authors": "Bence Lad\u00f3czki, Mikl\u00f3s R\u00e1sonyi, J\u00e1nos Tapolcai",
+    "authors": "Bence Ladóczki, Miklós Rásonyi, János Tapolcai",
     "session": {
       "number": 1,
       "title": "DeFi & AMMs"
@@ -291,7 +291,7 @@
   {
     "id": 128,
     "title": "Reuse of Public Keys Across UTXO and Account-Based Cryptocurrencies",
-    "authors": "Rainer St\u00fctz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
+    "authors": "Rainer Stütz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
     "session": {
       "number": 8,
       "title": "Nonce and Key Reuse"
@@ -390,7 +390,7 @@
     "authors": "Brendan Kobayashi Chou, Andrew Lewis-Pye, Patrick O'Grady",
     "session": {
       "number": 11,
-      "title": "Consensus \u2014 Fast Finality"
+      "title": "Consensus — Fast Finality"
     },
     "email_hashes": [
       "936afe9e21fcef57aace33e911bb12fdd77d32693244a33caf1fb88c9ce60a0e",
@@ -417,7 +417,7 @@
     "authors": "Sravya Yandamuri, Nibesh Shrestha, Luca Zanolini, Kartik Nayak",
     "session": {
       "number": 11,
-      "title": "Consensus \u2014 Fast Finality"
+      "title": "Consensus — Fast Finality"
     },
     "email_hashes": [
       "f6e715d805533b57a4c6ae37e8de90ced78d4b273bdd5f9167fcbde8acbaffad",
@@ -429,7 +429,7 @@
   {
     "id": 187,
     "title": "L for the Price of One",
-    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hern\u00e1n Dario Vanegas Madrigal",
+    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hernán Dario Vanegas Madrigal",
     "session": {
       "number": 6,
       "title": "Threshold & Encryption"
@@ -554,7 +554,7 @@
     "authors": "Simon Holmgaard Kamp, Julian Loss, Kartik Nayak, Kecheng Shi",
     "session": {
       "number": 11,
-      "title": "Consensus \u2014 Fast Finality"
+      "title": "Consensus — Fast Finality"
     },
     "email_hashes": [
       "6a0f3b9e80721bb318502d2381f5bbf1632650d97738caa70ea97e53c4344ea6",

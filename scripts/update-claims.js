@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // Fetches PaperNFT claims via RPC and generates claims.json for the gallery
 
-const CONTRACT = process.env.PAPER_NFT_ADDRESS || '0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1'
+const CONTRACT = process.env.PAPER_NFT_ADDRESS || '0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4'
 const RPC_URL = process.env.RPC_URL || 'https://base-sepolia-rpc.publicnode.com'
 const CLAIMED_TOPIC = '0x23a14e2ee35b4d16368d22b155c6b5125d622dd4781eae9eb80c9fda30aab9e5'
-const START_BLOCK = 38_019_000 // Just before contract deployment
+const START_BLOCK = 38_229_885 // V3 contract deployment block
 const CHUNK_SIZE = 50_000
 const fs = require('fs')
 
