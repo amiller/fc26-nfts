@@ -56,8 +56,8 @@ a:active { color: #990000; }
 .section.active { display: block; }
 
 /* Paper cards - retro styled */
-.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; max-width: 100%; box-sizing: border-box; }
-.paper-card:hover { background: #efe5cc; border-color: #806030; }
+.paper-card { background: #f5eedd; border: 2px ridge #a08060; padding: 10px 12px; margin-bottom: 6px; display: flex; gap: 12px; align-items: flex-start; max-width: 100%; box-sizing: border-box; }
+.paper-card[onclick]:hover { background: #efe5cc; border-color: #806030; cursor: pointer; }
 .paper-card.selected { background: #e8dab8; border-color: #660033; }
 .paper-card.claimed { border-left: 4px solid #006600; }
 .paper-img { width: 56px; height: 56px; border: 1px solid #a08060; object-fit: cover; flex-shrink: 0; }
@@ -346,7 +346,7 @@ function paperCard(p, clickable) {
       return `<a href="${link}" target="_blank">${addr}</a>`;
     }).join(', ')}</div>`;
   }
-  return `<div class="paper-card ${pc.length > 0 ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="selectPaper(${p.id})"` : ''}>
+  return `<div class="paper-card ${pc.length > 0 ? 'claimed' : ''}" data-id="${p.id}" ${clickable ? `onclick="location.hash='claim?paper=${p.id}'"` : ''}>
     <img class="paper-img" src="${img}" alt="Paper #${p.id}" loading="lazy">
     <div class="paper-info">
       <div class="paper-title">#${p.id}: ${p.title} ${badge}</div>
@@ -384,9 +384,10 @@ function renderClaimPapers() {
 
 function selectPaper(id) {
   selectedPaper = papers.find(p => p.id === id);
+  if (!selectedPaper) return;
   document.querySelectorAll("#claim-papers .paper-card").forEach(el => el.classList.remove("selected"));
   const el = document.querySelector(`#claim-papers .paper-card[data-id="${id}"]`);
-  if (el) el.classList.add("selected");
+  if (el) { el.classList.add("selected"); el.scrollIntoView({behavior: 'smooth', block: 'nearest'}); }
   document.getElementById("selected-title").textContent = `#${id}: ${selectedPaper.title}`;
 
   const numAuthors = (selectedPaper.authors || "").split(",").length;
