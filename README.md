@@ -45,10 +45,10 @@ Anyone with the same commit, a prover image, and an SES key can independently ru
 Both workflows check out a **pinned tag** (`v1.0.0`), so the code that sends verification emails and generates ZK proofs is always the code at that tagged commit — regardless of later pushes to `main`. Each mint produces a [Sigstore](https://www.sigstore.dev/) attestation tying the proof to a specific GitHub Actions run.
 
 The full repo at the tagged release is archived on IPFS for permanence:
-- **IPFS CID:** `QmW2PAwFcWpHbL3mAfHdCmXjtqgCJsQnFbxFkbkRaDRF9U` (see `site_cid.json`)
+- **IPFS CID:** `QmVHbtx5189JhYTohcwSMzWe2B8TCe35PVqqgEofW86AdT` (see `site_cid.json`)
 
 ```bash
-ipfs get QmW2PAwFcWpHbL3mAfHdCmXjtqgCJsQnFbxFkbkRaDRF9U
+ipfs get QmVHbtx5189JhYTohcwSMzWe2B8TCe35PVqqgEofW86AdT
 unzip fc26-rump-session-v1.0.0.zip
 # inspect workflows, contract source, papers.json, etc.
 ```
