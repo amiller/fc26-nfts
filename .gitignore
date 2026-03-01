@@ -16,7 +16,12 @@ composite_images.py
 extract_metadata.py
 upload_pinata.py
 register_papers.py
+register_papers_v2.py
 publish_ipfs.py
+scripts/register_new_emails.sh
+
+# Credentials
+.pinata
 
 # Build artifacts
 seeds/
