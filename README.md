@@ -19,7 +19,7 @@ There is nothing privileged about this repository. The verification workflow use
 
 - A **pinned prover image** (`sha256:d85e563...`) that generates ZK proofs — anyone can inspect or run it
 - **[Sigstore](https://www.sigstore.dev/) attestation** tied to the GitHub Actions run, providing a transparent audit trail
-- A **public smart contract** on Base Sepolia ([`0x101D...e9B4`](https://sepolia.basescan.org/address/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4)) that verifies proofs on-chain
+- A **public smart contract** on Base Sepolia ([`0x101D...e9B4`](https://sepolia.basescan.org/address/0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5)) that verifies proofs on-chain
 
 Anyone with the same commit, a prover image, and an SES key can independently run this workflow. The ZK proof is verifiable by anyone against the on-chain verifier.
 
@@ -34,8 +34,8 @@ Anyone with the same commit, a prover image, and an SES key can independently ru
 
 [`contracts/PaperNFT.sol`](contracts/PaperNFT.sol) — ERC-721, one NFT per (paper, author_email) pair.
 
-- **Address:** [`0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4`](https://sepolia.basescan.org/address/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4) (Base Sepolia)
-- **Token gallery:** [Blockscout NFT page](https://base-sepolia.blockscout.com/token/0x101DDc73E4b1e03a2a4A1d857c31A2CE98CCe9B4)
+- **Address:** [`0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5`](https://sepolia.basescan.org/address/0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5) (Base Sepolia)
+- **Token gallery:** [Blockscout NFT page](https://base-sepolia.blockscout.com/token/0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5)
 - Reuses [SigstoreVerifier](https://sepolia.basescan.org/address/0xbD08fd15E893094Ad3191fdA0276Ac880d0FA3e1) from [github-zktls](https://github.com/amiller/github-zktls)
 - Owner registers papers with authorized email hashes
 - `tokenURI` returns IPFS metadata with AI-generated artwork

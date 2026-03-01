@@ -63,29 +63,27 @@ contract PaperNFT {
         requiredCommitSha = _requiredCommitSha;
     }
 
-    /// @notice Register a paper with its authorized author emails and metadata URI
-    function registerPaper(uint256 paperId, string[] calldata emails, string calldata metadataURI) external onlyOwner {
+    function registerPaper(uint256 paperId, bytes32[] calldata emailHashes, string calldata metadataURI) external onlyOwner {
         delete _paperEmails[paperId];
-        for (uint256 i = 0; i < emails.length; i++) {
-            _paperEmails[paperId].push(keccak256(bytes(_toLowerMem(emails[i]))));
+        for (uint256 i = 0; i < emailHashes.length; i++) {
+            _paperEmails[paperId].push(emailHashes[i]);
         }
         paperMetadataURI[paperId] = metadataURI;
-        emit PaperRegistered(paperId, emails.length);
+        emit PaperRegistered(paperId, emailHashes.length);
     }
 
-    /// @notice Batch register multiple papers
     function registerPapers(
         uint256[] calldata paperIds,
-        string[][] calldata emailsPerPaper,
+        bytes32[][] calldata emailHashesPerPaper,
         string[] calldata metadataURIs
     ) external onlyOwner {
         for (uint256 i = 0; i < paperIds.length; i++) {
             delete _paperEmails[paperIds[i]];
-            for (uint256 j = 0; j < emailsPerPaper[i].length; j++) {
-                _paperEmails[paperIds[i]].push(keccak256(bytes(_toLowerMem(emailsPerPaper[i][j]))));
+            for (uint256 j = 0; j < emailHashesPerPaper[i].length; j++) {
+                _paperEmails[paperIds[i]].push(emailHashesPerPaper[i][j]);
             }
             paperMetadataURI[paperIds[i]] = metadataURIs[i];
-            emit PaperRegistered(paperIds[i], emailsPerPaper[i].length);
+            emit PaperRegistered(paperIds[i], emailHashesPerPaper[i].length);
         }
     }
 
@@ -219,14 +217,6 @@ contract PaperNFT {
             lower[i] = (b[i] >= 0x41 && b[i] <= 0x5A) ? bytes1(uint8(b[i]) + 32) : b[i];
         }
         return string(lower);
-    }
-
-    function _toLowerMem(string memory s) internal pure returns (string memory) {
-        bytes memory b = bytes(s);
-        for (uint256 i = 0; i < b.length; i++) {
-            if (b[i] >= 0x41 && b[i] <= 0x5A) b[i] = bytes1(uint8(b[i]) + 32);
-        }
-        return string(b);
     }
 
     function addressToHex(address a) internal pure returns (string memory) {

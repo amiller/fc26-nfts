@@ -20,7 +20,7 @@
     "authors": "Francesco D'Amato, Roberto Saltini, Thanh-Hai Tran, Yann Vonlanthen, Luca Zanolini",
     "session": {
       "number": 11,
-      "title": "Consensus — Fast Finality"
+      "title": "Consensus \u2014 Fast Finality"
     },
     "email_hashes": [
       "8f09d5a62f145bdfb655106829339a6d4562b74a0a7d79a92eaddff12809e3dc",
@@ -39,7 +39,10 @@
       "title": "Incentives & Decentralization"
     },
     "email_hashes": [
-      "19e32438ee0e04737ef2175ac4cc84200b243172c344206dbbfe96b2a1fa3612"
+      "19e32438ee0e04737ef2175ac4cc84200b243172c344206dbbfe96b2a1fa3612",
+      "6de65a4b6e0ef48dd1d893f6558e79323afd40045a430823ba8791cd3ab884c4",
+      "8937ea312b98634ac27b77004990b5328c3142fb3544393ef962df8e529cfbcc",
+      "269da8b86adb57f31bef541d16207e514aaefa9c650bc1b6c7f822ab3c6a8707"
     ]
   },
   {
@@ -50,7 +53,10 @@
       "number": 4,
       "title": "Incentives & Decentralization"
     },
-    "email_hashes": []
+    "email_hashes": [
+      "e750907c3347974e012a027b931b900e6bb38e2b32fe113d90cabeba0c08f459",
+      "72294148572f97454f5e6cb8de35f8a05d73e20131dae8440e9302447f40f519"
+    ]
   },
   {
     "id": 26,
@@ -172,7 +178,7 @@
   {
     "id": 95,
     "title": "Bribers, Bribers on The Chain",
-    "authors": "Bence Soóki-Tóth, István András Seres, Kamilla Kara, Ábel Nagy, Balázs Pejó, Gergely Biczók",
+    "authors": "Bence So\u00f3ki-T\u00f3th, Istv\u00e1n Andr\u00e1s Seres, Kamilla Kara, \u00c1bel Nagy, Bal\u00e1zs Pej\u00f3, Gergely Bicz\u00f3k",
     "session": {
       "number": 2,
       "title": "Consensus & Smart Contracts"
@@ -256,13 +262,14 @@
     },
     "email_hashes": [
       "82ef1acd7e0cf484c5c8a3b3ea55e62b40e24dbee98bc224f61a4956652d7fa9",
-      "7099a45a6ee5fb650f4c8bef723004ea17263bfa35f2a7fee3f3e7280106b14d"
+      "7099a45a6ee5fb650f4c8bef723004ea17263bfa35f2a7fee3f3e7280106b14d",
+      "6559643ddabf3316cfcf970c08c88ccf9f5135487abbc817b4cb25b54133481a"
     ]
   },
   {
     "id": 117,
     "title": "Where Does MEV Really Come From?",
-    "authors": "Bence Ladóczki, Miklós Rásonyi, János Tapolcai",
+    "authors": "Bence Lad\u00f3czki, Mikl\u00f3s R\u00e1sonyi, J\u00e1nos Tapolcai",
     "session": {
       "number": 1,
       "title": "DeFi & AMMs"
@@ -291,7 +298,7 @@
   {
     "id": 128,
     "title": "Reuse of Public Keys Across UTXO and Account-Based Cryptocurrencies",
-    "authors": "Rainer Stütz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
+    "authors": "Rainer St\u00fctz, Nicholas Stifter, Melitta Dragaschnig, Bernhard Haslhofer, Aljosha Judmayer",
     "session": {
       "number": 8,
       "title": "Nonce and Key Reuse"
@@ -340,7 +347,8 @@
     "email_hashes": [
       "04fd4472c78fb1c8f2a2c2d9edb2231bc75c1985b2327d30b8007628fa04e4d6",
       "2440a64089d09e96cf1cd40df0b234ac318ba2f303b48731bf1a0abd065ca579",
-      "ef7324e4d08644eeae3928458847b15bcfc502852dec83a03def8536dbc20596"
+      "ef7324e4d08644eeae3928458847b15bcfc502852dec83a03def8536dbc20596",
+      "1bdf382f2938165643889f2ddff9c7b05e8e3bd8aa4d66cb425d0a43e71467c8"
     ]
   },
   {
@@ -390,7 +398,7 @@
     "authors": "Brendan Kobayashi Chou, Andrew Lewis-Pye, Patrick O'Grady",
     "session": {
       "number": 11,
-      "title": "Consensus — Fast Finality"
+      "title": "Consensus \u2014 Fast Finality"
     },
     "email_hashes": [
       "936afe9e21fcef57aace33e911bb12fdd77d32693244a33caf1fb88c9ce60a0e",
@@ -408,7 +416,8 @@
     "email_hashes": [
       "99c869e59272d4025d43934433a8cb218c3d7582ead4204ed5fdc2ee1870f4a5",
       "ad0534c8e6c6c6032d6058d6f8e7ee0ab37fec1c724561c66b6101fd9576ae06",
-      "9a8db30cc77e10db22b1762b1e8478d4ff552fc0f327e8c2a4c848bf5437da3f"
+      "9a8db30cc77e10db22b1762b1e8478d4ff552fc0f327e8c2a4c848bf5437da3f",
+      "27311a5b7810ec0680553b365ed78f16363a5dfc8146592e7c8a5214890a73e1"
     ]
   },
   {
@@ -417,7 +426,7 @@
     "authors": "Sravya Yandamuri, Nibesh Shrestha, Luca Zanolini, Kartik Nayak",
     "session": {
       "number": 11,
-      "title": "Consensus — Fast Finality"
+      "title": "Consensus \u2014 Fast Finality"
     },
     "email_hashes": [
       "f6e715d805533b57a4c6ae37e8de90ced78d4b273bdd5f9167fcbde8acbaffad",
@@ -429,7 +438,7 @@
   {
     "id": 187,
     "title": "L for the Price of One",
-    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hernán Dario Vanegas Madrigal",
+    "authors": "Daniel Escudero, Yashvanth Kondi, Yifan Song, Hern\u00e1n Dario Vanegas Madrigal",
     "session": {
       "number": 6,
       "title": "Threshold & Encryption"
@@ -466,7 +475,8 @@
     },
     "email_hashes": [
       "02a73f6d8540afeb1db3b39007dfd8f59979b071406084da1b65fbee83f35e83",
-      "b97160c93bc32693fa3ca712eb46f250bc243b20ee2dd82a7cf2363b4edc1c36"
+      "b97160c93bc32693fa3ca712eb46f250bc243b20ee2dd82a7cf2363b4edc1c36",
+      "a004b516e3f6b6042d1eeda602aa4cb45d932b2d3690d6f9b2949e3076dac8a9"
     ]
   },
   {
@@ -554,7 +564,7 @@
     "authors": "Simon Holmgaard Kamp, Julian Loss, Kartik Nayak, Kecheng Shi",
     "session": {
       "number": 11,
-      "title": "Consensus — Fast Finality"
+      "title": "Consensus \u2014 Fast Finality"
     },
     "email_hashes": [
       "6a0f3b9e80721bb318502d2381f5bbf1632650d97738caa70ea97e53c4344ea6",
@@ -641,7 +651,8 @@
       "title": "Threshold & Encryption"
     },
     "email_hashes": [
-      "c732ae432cb95df1ab34a3b6fa5cec6564ba5990fd3c7c18934e3c3692cf4e32"
+      "c732ae432cb95df1ab34a3b6fa5cec6564ba5990fd3c7c18934e3c3692cf4e32",
+      "a93376e955dbec669892ee927531b69d4141f71d351146ff4185da6ffdb13077"
     ]
   }
 ]

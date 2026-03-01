@@ -126,7 +126,7 @@ input:focus { outline: 2px solid #006600; }
   <a class="nav-btn" href="#" data-tab="protocol">Protocol</a>
   <a class="nav-btn" href="https://github.com/amiller/fc26-nfts" target="_blank">GitHub &#x2197;</a>
   <a class="nav-btn" href="https://www.overleaf.com/read/vmwnhsrmbdgc" target="_blank">ZK-TLS Paper &#x2197;</a>
-  <a class="nav-btn" href="https://base-sepolia.blockscout.com/token/0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1" target="_blank">Blockscout &#x2197;</a>
+  <a class="nav-btn" href="https://base-sepolia.blockscout.com/token/0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5" target="_blank">Blockscout &#x2197;</a>
 </div>
 
 <div class="content">
@@ -285,9 +285,9 @@ input:focus { outline: 2px solid #006600; }
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
 const IMG_DIR = "https://raw.githubusercontent.com/amiller/fc26-nfts/images/images/composited/";
-const CONTRACT = "0x3a9a92e0b35d8c6c85ced8b92b6977a5b722f2f1";
+const CONTRACT = "0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5";
 const BLOCKSCOUT = "https://base-sepolia.blockscout.com";
-let papers = [], claimsByPaper = {}, selectedPaper = null;
+let papers = [], claimsByPaper = {}, selectedPaper = null, emailHints = {};
 
 async function sha256hex(str) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
@@ -295,8 +295,8 @@ async function sha256hex(str) {
 }
 
 async function load() {
-  const [pRes, cRes] = await Promise.all([
-    fetch("papers.json"), fetch("claims.json").catch(() => null)
+  const [pRes, cRes, hRes] = await Promise.all([
+    fetch("papers.json"), fetch("claims.json").catch(() => null), fetch("email_hints.json").catch(() => null)
   ]);
   papers = await pRes.json();
   if (cRes && cRes.ok) {
@@ -304,6 +304,7 @@ async function load() {
     for (const c of data.claims) (claimsByPaper[c.paperId] ||= []).push(c);
     document.getElementById("updated").textContent = `Claims updated ${new Date(data.updatedAt).toLocaleString()}`;
   }
+  if (hRes && hRes.ok) emailHints = await hRes.json();
   renderStats();
   renderGallery();
   renderClaimPapers();
@@ -372,8 +373,8 @@ function renderClaimPapers() {
   let html = "";
   for (const p of papers) {
     const pc = (claimsByPaper[p.id] || []).length;
-    const nh = (p.email_hashes || []).length;
-    if (nh > 0 && pc >= nh) continue;
+    const numAuthors = (p.authors || "").split(",").length;
+    if (pc >= numAuthors) continue;
     html += paperCard(p, true);
   }
   if (!html) html = '<p style="color:#666; text-align:center; padding:40px">All papers have been claimed!</p>';
@@ -424,7 +425,9 @@ async function checkAndGenerate() {
 
   if (!hashes.includes(hash)) {
     result.className = "error"; result.style.display = "block";
-    result.innerHTML = "This email is not registered as an author of this paper.";
+    const domains = emailHints[selectedPaper.id] || [];
+    const hint = domains.length ? `<br><span class="info">Hint: registered emails use these domains: <b>${domains.join(", ")}</b></span>` : "";
+    result.innerHTML = `This email is not registered as an author of this paper.${hint}`;
     return;
   }
 
@@ -447,18 +450,41 @@ async function checkAndGenerate() {
   result.innerHTML = `Email matches! <a href="${url}" target="_blank">Open GitHub issue to claim &rarr;</a><br><span class="info">A verification email will be sent to you. Reply with the code to mint your NFT.</span>`;
 }
 
-// Nav tabs
+// Nav tabs + URL hash routing
+function switchTab(tab) {
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  const btn = document.querySelector(`.nav-btn[data-tab="${tab}"]`);
+  if (btn) btn.classList.add("active");
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  const section = document.getElementById(tab);
+  if (section) section.classList.add("active");
+}
+
+function readHash() {
+  const hash = location.hash.slice(1);
+  const params = new URLSearchParams(hash.includes('?') ? hash.split('?')[1] : '');
+  const tab = hash.split('?')[0] || 'gallery';
+  return { tab, paperId: params.get('paper') ? parseInt(params.get('paper')) : null };
+}
+
+function applyHash() {
+  const { tab, paperId } = readHash();
+  switchTab(tab);
+  if (tab === 'claim' && paperId && papers.length) selectPaper(paperId, true);
+}
+
 document.querySelectorAll(".nav-btn[data-tab]").forEach(btn => {
   btn.addEventListener("click", e => {
     e.preventDefault();
-    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-    document.getElementById(btn.dataset.tab).classList.add("active");
+    location.hash = btn.dataset.tab;
   });
 });
 
-load();
+window.addEventListener("hashchange", applyHash);
+
+load().then(() => {
+  if (location.hash) applyHash();
+});
 </script>
 </body>
 </html>
