@@ -285,6 +285,7 @@ input:focus { outline: 2px solid #006600; }
 const SALT = "FC26-rump-session-2026";
 const REPO = "amiller/fc26-nfts";
 const IMG_DIR = "https://raw.githubusercontent.com/amiller/fc26-nfts/images/images/composited/";
+const THUMB_DIR = "https://raw.githubusercontent.com/amiller/fc26-nfts/images/images/thumbnails/";
 const CONTRACT = "0x9091B8b6682FF90B80ef2Fc399467c9340cC9be5";
 const BLOCKSCOUT = "https://base-sepolia.blockscout.com";
 let papers = [], claimsByPaper = {}, selectedPaper = null, emailHints = {};
@@ -327,7 +328,7 @@ function renderStats() {
 function paperCard(p, clickable) {
   const pc = claimsByPaper[p.id] || [];
   const numHashes = (p.email_hashes || []).length;
-  const img = `${IMG_DIR}${p.id}.png`;
+  const img = `${THUMB_DIR}${p.id}.png`;
   let badge, claimedInfo = '';
   if (pc.length === 0) {
     badge = numHashes > 0
