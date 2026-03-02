@@ -7,8 +7,8 @@
       "note": "MUST match. Baked into the on-chain HonkVerifier. If your prover produces a different VK, proofs will fail with SumcheckFailed(). Any prover (Docker, local, custom) works as long as it produces this VK."
     },
     "required_commit": {
-      "value": "f4893cf873dd4e21dc728ce2c57c1ed26ee4d825",
-      "tag": "v1.0.0",
+      "value": "0fd0b60f9f9c3292e43eec9b2f9360fb9864cc63",
+      "tag": "v1.0.1",
       "note": "MUST match. The PaperNFT contract checks the commit SHA from the Sigstore attestation. Dispatch runs workflows from this tag."
     }
   },
