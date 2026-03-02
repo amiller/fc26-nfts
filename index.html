@@ -134,7 +134,7 @@ input:focus { outline: 2px solid #006600; }
 <div id="gallery" class="section active"></div>
 
 <div id="claim" class="section">
-  <p style="color:#555; margin-bottom:14px">Select a paper, enter your author email to verify eligibility, then open a GitHub issue to start the claim.</p>
+  <p style="color:#555; margin-bottom:14px"><strong>1.</strong> Select a paper and enter your email below. <strong>2.</strong> Open the GitHub issue. <strong>3.</strong> Check your email and click the one-click verify link. That's it!</p>
   <p style="color:#888; font-size:0.85em; margin-bottom:14px">No GitHub account? Alternative coming soon.</p>
   <div id="claim-papers"></div>
   <div id="claim-form">
@@ -161,7 +161,7 @@ input:focus { outline: 2px solid #006600; }
       <li>Select your paper and enter your email &mdash; checked locally against a hash</li>
       <li>Open a GitHub issue containing only your email's hash (not your email)</li>
       <li>A GitHub Action resolves the hash to an email address (via a GitHub secret) and sends a verification code</li>
-      <li>Reply with the code &mdash; the action generates a Sigstore-attested certificate binding your email to the proof, then mints your NFT on Base Sepolia. The on-chain contract verifies both that the email matches the attested certificate and that it's a registered author for that paper.</li>
+      <li>Click the one-click verify link in the email (or paste the code as a comment) &mdash; the action generates a Sigstore-attested certificate binding your email to the proof, then mints your NFT on Base Sepolia. The on-chain contract verifies both that the email matches the attested certificate and that it's a registered author for that paper.</li>
     </ol>
   </div>
 
@@ -450,7 +450,7 @@ async function checkAndGenerate() {
   const url = `https://github.com/${REPO}/issues/new?title=${title}&body=${body}`;
 
   result.className = "success"; result.style.display = "block";
-  result.innerHTML = `Email matches! <a href="${url}" target="_blank">Open GitHub issue to claim &rarr;</a><br><span class="info">A verification email will be sent to you. Reply with the code to mint your NFT.</span>`;
+  result.innerHTML = `Email matches! <a href="${url}" target="_blank">Open GitHub issue to claim &rarr;</a><br><span class="info">A verification email will be sent to you. Click the link in that email to verify — your NFT will be minted automatically.</span>`;
 }
 
 // Nav tabs + URL hash routing

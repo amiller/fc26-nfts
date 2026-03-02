@@ -84,8 +84,13 @@ jobs:
           TOKEN="${{ steps.challenge.outputs.token }}"
           RECIPIENT="${{ steps.parse.outputs.recipient }}"
           PAPER_ID="${{ steps.parse.outputs.paper_id }}"
+          ISSUE_NUMBER="${{ inputs.issue_number }}"
           REPO="${{ github.repository }}"
           ADDR_SHORT="${RECIPIENT:0:6}...${RECIPIENT: -4}"
+
+          VERIFY_TITLE=$(python3 -c "import urllib.parse; print(urllib.parse.quote('[VERIFY] Paper #${PAPER_ID}'))")
+          VERIFY_BODY=$(python3 -c "import urllib.parse; print(urllib.parse.quote('${TOKEN}\nchallenge_issue: ${ISSUE_NUMBER}'))")
+          VERIFY_URL="https://github.com/${REPO}/issues/new?title=${VERIFY_TITLE}&body=${VERIFY_BODY}"
 
           RAW_MSG="From: ${FROM}
           To: ${TO}
@@ -97,8 +102,11 @@ jobs:
             <h2 style=\"margin-top:0\">FC'26 Rump Session NFT</h2>
             <p>A request was made to verify <strong>${TO}</strong> as an author of <strong>Paper #${PAPER_ID}</strong> for the unofficial FC'26 Rump Session NFT project, minting to:</p>
             <p style=\"font-family:monospace;background:#f5f5f5;padding:10px;border-radius:4px;word-break:break-all\">${RECIPIENT}</p>
-            <p>If you authorized this, copy the code below and share it with whoever is helping you claim your NFT.</p>
             <p style=\"color:#b08800;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px;font-size:13px\">Do not share this code if you did not request this verification.</p>
+            <p style=\"text-align:center;margin:16px 0\"><a href=\"${VERIFY_URL}\" style=\"display:inline-block;padding:12px 28px;background:#006600;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;font-size:15px\">Click here to verify &rarr;</a></p>
+            <p style=\"color:#666;font-size:13px;text-align:center\">This opens a pre-filled GitHub issue. Just click &ldquo;Submit new issue&rdquo; to complete verification.</p>
+            <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\">
+            <p style=\"color:#888;font-size:12px\">Or, share this code with whoever is helping you claim your NFT:</p>
             <p style=\"font-family:monospace;background:#f0f0f0;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;word-break:break-all;text-align:center;letter-spacing:1px\">${TOKEN}</p>
             <p style=\"color:#666;font-size:13px\">This code expires in 1 hour.</p>
             <hr style=\"border:none;border-top:1px solid #eee;margin:20px 0\">
@@ -128,7 +136,7 @@ jobs:
               body: [
                 `## 📧 Verification email sent!`,
                 ``,
-                `An email was sent to verify authorship of **Paper #${paperId}**. The recipient should share the verification code, then comment it on this issue.`,
+                `An email was sent to verify authorship of **Paper #${paperId}**. The email contains a one-click verify link. Alternatively, the recipient can comment the verification code on this issue.`,
                 ``,
                 `<details>`,
                 `<summary>Verification metadata (for auditors)</summary>`,

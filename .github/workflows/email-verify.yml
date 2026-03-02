@@ -7,7 +7,10 @@ on:
         required: true
         type: string
       comment_body:
-        required: true
+        required: false
+        type: string
+      issue_body:
+        required: false
         type: string
 
 permissions:
@@ -28,18 +31,37 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const issueNumber = parseInt(context.payload.inputs.issue_number);
-            const token = (context.payload.inputs.comment_body || '').trim();
+            const inputIssueNumber = parseInt(context.payload.inputs.issue_number);
+            const commentBody = (context.payload.inputs.comment_body || '').trim();
+            const issueBody = (context.payload.inputs.issue_body || '').trim();
+
+            // Determine token and challenge issue number
+            let token, challengeIssueNumber;
+            if (issueBody) {
+              // [VERIFY] issue flow: body contains token + challenge_issue reference
+              const lines = issueBody.split('\n').map(l => l.trim());
+              token = lines[0];
+              const refMatch = issueBody.match(/challenge_issue:\s*(\d+)/);
+              if (!refMatch) {
+                core.setFailed('No challenge_issue reference found in [VERIFY] issue body');
+                return;
+              }
+              challengeIssueNumber = parseInt(refMatch[1]);
+            } else {
+              // Comment flow: token is the comment, challenge issue is the issue itself
+              token = commentBody;
+              challengeIssueNumber = inputIssueNumber;
+            }
 
             if (!token || token.length < 32 || !/^[a-f0-9]+$/i.test(token)) {
-              console.log('Comment is not a valid hex token, skipping.');
+              console.log('Not a valid hex token, skipping.');
               core.setOutput('skip', 'true');
               return;
             }
             core.setOutput('skip', 'false');
 
             const comments = await github.rest.issues.listComments({
-              issue_number: issueNumber,
+              issue_number: challengeIssueNumber,
               owner: context.repo.owner,
               repo: context.repo.repo
             });
@@ -94,6 +116,8 @@ jobs:
             core.setOutput('email_hash', emailMatch[1]);
             core.setOutput('recipient', recipientMatch[1]);
             core.setOutput('token', token);
+            core.setOutput('challenge_issue', String(challengeIssueNumber));
+            core.setOutput('verify_issue', issueBody ? String(inputIssueNumber) : '');
 
       - name: Verify token
         if: steps.meta.outputs.skip != 'true'
@@ -246,56 +270,87 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const issueNumber = parseInt(context.payload.inputs.issue_number);
+            const challengeIssue = parseInt('${{ steps.meta.outputs.challenge_issue }}');
+            const verifyIssue = '${{ steps.meta.outputs.verify_issue }}';
             const txHash = '${{ steps.submit.outputs.tx_hash }}';
             const emailHash = '${{ steps.meta.outputs.email_hash }}';
             const recipient = '${{ steps.meta.outputs.recipient }}';
             const paperId = '${{ steps.meta.outputs.paper_id }}';
 
+            const successBody = [
+              `## ✅ Author Verified — Paper NFT Minted!`,
+              ``,
+              `**Paper:** #${paperId}`,
+              `**Email hash:** \`${emailHash}\``,
+              `**Recipient:** \`${recipient}\``,
+              `**Transaction:** [${txHash}](https://sepolia.basescan.org/tx/${txHash})`,
+              ``,
+              `Your FC'26 Rump Session NFT has been minted on Base Sepolia.`
+            ].join('\n');
+
             await github.rest.issues.createComment({
-              issue_number: issueNumber,
+              issue_number: challengeIssue,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: [
-                `## ✅ Author Verified — Paper NFT Minted!`,
-                ``,
-                `**Paper:** #${paperId}`,
-                `**Email hash:** \`${emailHash}\``,
-                `**Recipient:** \`${recipient}\``,
-                `**Transaction:** [${txHash}](https://sepolia.basescan.org/tx/${txHash})`,
-                ``,
-                `Your FC'26 Rump Session NFT has been minted on Base Sepolia.`
-              ].join('\n')
+              body: successBody
             });
             await github.rest.issues.update({
-              issue_number: issueNumber,
+              issue_number: challengeIssue,
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'closed',
               labels: ['paper-claimed']
             });
 
+            // Close the [VERIFY] issue too if it exists
+            if (verifyIssue) {
+              await github.rest.issues.createComment({
+                issue_number: parseInt(verifyIssue),
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: successBody
+              });
+              await github.rest.issues.update({
+                issue_number: parseInt(verifyIssue),
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'closed'
+              });
+            }
+
       - name: Comment failure
         if: failure() && steps.meta.outputs.skip != 'true'
         uses: actions/github-script@v7
         with:
           script: |
-            const issueNumber = parseInt(context.payload.inputs.issue_number);
+            const challengeIssue = parseInt('${{ steps.meta.outputs.challenge_issue }}') || parseInt(context.payload.inputs.issue_number);
+            const verifyIssue = '${{ steps.meta.outputs.verify_issue }}';
             const step = '${{ steps.verify.outcome }}' === 'failure' ? 'token verification'
               : '${{ steps.submit.outcome }}' === 'failure' ? 'claim submission'
               : 'proof generation';
             const errorReason = '${{ steps.submit.outputs.error_reason }}' || 'See workflow logs';
 
+            const failBody = [
+              `## ❌ Verification Failed`,
+              ``,
+              `**Step:** ${step}`,
+              `**Reason:** ${errorReason}`,
+              ``,
+              `[View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+            ].join('\n');
+
             await github.rest.issues.createComment({
-              issue_number: issueNumber,
+              issue_number: challengeIssue,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: [
-                `## ❌ Verification Failed`,
-                ``,
-                `**Step:** ${step}`,
-                `**Reason:** ${errorReason}`,
-                ``,
-                `[View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`
-              ].join('\n')
+              body: failBody
             });
+
+            if (verifyIssue) {
+              await github.rest.issues.createComment({
+                issue_number: parseInt(verifyIssue),
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: failBody
+              });
+            }
