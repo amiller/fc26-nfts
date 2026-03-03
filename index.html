@@ -146,7 +146,7 @@ input:focus { outline: 2px solid #006600; }
 
 <div id="claim" class="section">
   <p style="color:#555; margin-bottom:14px"><strong>1.</strong> Select a paper and enter your email below. <strong>2.</strong> Open the GitHub issue. <strong>3.</strong> Check your email and click the one-click verify link. That's it!</p>
-  <p style="color:#888; font-size:0.85em; margin-bottom:14px">No GitHub account? Alternative coming soon.</p>
+  <p style="color:#888; font-size:0.85em; margin-bottom:14px">No GitHub account? Use our TEE-based relayer — no sign-in needed.</p>
   <div id="claim-papers"></div>
   <div id="claim-form">
     <h2 id="selected-title"></h2>
@@ -157,7 +157,7 @@ input:focus { outline: 2px solid #006600; }
     <input type="text" id="recipient" placeholder="0x..." pattern="0x[a-fA-F0-9]{40}">
     <p class="info">The address that will receive the NFT on Base Sepolia.</p>
     <button id="check-btn" onclick="checkAndGenerate()">Check Eligibility</button>
-    <p style="color:#888; font-size:0.85em; margin-top:10px">No GitHub account? Alternative coming soon.</p>
+    <p style="color:#888; font-size:0.85em; margin-top:10px">No GitHub account? Use "Claim using our relayer" after checking eligibility.</p>
     <div id="result"></div>
   </div>
 </div>
@@ -580,11 +580,7 @@ window.addEventListener("hashchange", applyHash);
 load().then(() => {
   if (location.hash) applyHash();
 });
-fetch(TEE_BASE + "/invoke/" + TEE_PERMIT_ID, {
-  method: "POST",
-  headers: { "Authorization": "Bearer " + TEE_BEARER, "Content-Type": "application/json" },
-  body: "{}"
-}).then(r => { teeAvailable = r.status !== 401; }).catch(() => {});
+fetch(TEE_BASE + "/health").then(r => { teeAvailable = r.ok; }).catch(() => {});
 </script>
 </body>
 </html>
