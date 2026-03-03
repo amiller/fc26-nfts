@@ -467,10 +467,10 @@ async function checkAndGenerate() {
   result.className = "success"; result.style.display = "block";
   let html = `Email matches! Choose how to claim:<div class="claim-options">`;
   if (teeAvailable) {
-    html += `<button class="claim-btn" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim via TEE (no GitHub account needed)</button>`;
+    html += `<button class="claim-btn" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim using our relayer</button>`;
     html += `<div class="claim-divider">&mdash; or &mdash;</div>`;
   }
-  html += `<a href="${ghUrl}" target="_blank" class="nav-btn" style="display:block; text-align:center; text-decoration:none; margin:8px 0;">Open GitHub issue to claim &rarr;</a>`;
+  html += `<a href="${ghUrl}" target="_blank" class="claim-btn" style="display:block; text-decoration:none; text-align:center;">Claim using your own GitHub account &rarr;</a>`;
   html += `</div>`;
   result.innerHTML = html;
 }
@@ -513,7 +513,7 @@ async function doTeeClaim(paperId, emailHash, recipient) {
       + `</div>`;
   } catch (e) {
     btn.disabled = false;
-    btn.textContent = "Claim via TEE (no GitHub account needed)";
+    btn.textContent = "Claim using our relayer";
     result.innerHTML += `<div style="color:#990000; margin-top:8px;">TEE claim failed: ${e.message}</div>`;
   }
 }
