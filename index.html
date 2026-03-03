@@ -85,8 +85,6 @@ input:focus { outline: 2px solid #006600; }
 .claim-btn { display: block; width: 100%; margin: 8px 0; padding: 12px 16px; background: #f5eedd; color: #654321;
   border: 2px ridge #a08060; font-family: "Book Antiqua", serif; font-size: 0.95em; cursor: pointer; font-weight: bold; text-align: center; }
 .claim-btn:hover { background: #efe5cc; }
-.claim-btn.primary { background: #654321; color: #f5eedd; border-color: #4a2f15; }
-.claim-btn.primary:hover { background: #7a5535; }
 .claim-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .claim-divider { text-align: center; color: #999; font-size: 0.85em; margin: 6px 0; }
 .verify-section { margin-top: 12px; padding: 12px; background: #f5eedd; border: 2px ridge #a08060; }
@@ -467,7 +465,7 @@ async function checkAndGenerate() {
   result.className = "success"; result.style.display = "block";
   let html = `Email matches! Choose how to claim:<div class="claim-options">`;
   if (teeAvailable) {
-    html += `<button class="claim-btn primary" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim using our relayer</button>`;
+    html += `<button class="claim-btn" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim using our relayer</button>`;
     html += `<div class="claim-divider">&mdash; or &mdash;</div>`;
   }
   html += `<a href="${ghUrl}" target="_blank" class="claim-btn" style="display:block; text-decoration:none; text-align:center;">Claim using your own GitHub account &rarr;</a>`;
@@ -504,8 +502,9 @@ async function doTeeClaim(paperId, emailHash, recipient) {
   btn.textContent = "Creating issue...";
   try {
     const res = await teeClaim(paperId, emailHash, recipient);
-    location.hash = `claim?paper=${paperId}&issue=${res.issue_number}`;
+    history.replaceState(null, '', `#claim?paper=${paperId}&issue=${res.issue_number}`);
     showVerifyUI(res.issue_number);
+    result.scrollIntoView({behavior: 'smooth', block: 'nearest'});
   } catch (e) {
     btn.disabled = false;
     btn.textContent = "Claim using our relayer";
