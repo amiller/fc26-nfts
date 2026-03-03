@@ -652,17 +652,5 @@
       "c732ae432cb95df1ab34a3b6fa5cec6564ba5990fd3c7c18934e3c3692cf4e32",
       "a93376e955dbec669892ee927531b69d4141f71d351146ff4185da6ffdb13077"
     ]
-  },
-  {
-    "id": 999,
-    "title": "Test Paper: TEE Claim Flow",
-    "authors": "Test Author",
-    "session": {
-      "number": 99,
-      "title": "Test Session"
-    },
-    "email_hashes": [
-      "38f90ff94aaaf1e06b173e35eca7a9e67d348310856a16153fa569d505c040f5"
-    ]
   }
 ]
