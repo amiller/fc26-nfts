@@ -504,13 +504,8 @@ async function doTeeClaim(paperId, emailHash, recipient) {
   btn.textContent = "Creating issue...";
   try {
     const res = await teeClaim(paperId, emailHash, recipient);
-    result.innerHTML = `Issue <a href="${res.url}" target="_blank">#${res.issue_number}</a> created! Check your email for a verification code.`
-      + `<div class="verify-section">`
-      + `<label>Verification code from email:</label>`
-      + `<input type="text" id="verify-code" placeholder="Enter code">`
-      + `<button class="verify-btn" onclick="doTeeVerify(${res.issue_number})">Verify</button>`
-      + `<div id="verify-result" style="margin-top:8px"></div>`
-      + `</div>`;
+    location.hash = `claim?paper=${paperId}&issue=${res.issue_number}`;
+    showVerifyUI(res.issue_number);
   } catch (e) {
     btn.disabled = false;
     btn.textContent = "Claim using our relayer";
@@ -549,13 +544,28 @@ function readHash() {
   const hash = location.hash.slice(1);
   const params = new URLSearchParams(hash.includes('?') ? hash.split('?')[1] : '');
   const tab = hash.split('?')[0] || 'gallery';
-  return { tab, paperId: params.get('paper') ? parseInt(params.get('paper')) : null };
+  return { tab, paperId: params.get('paper') ? parseInt(params.get('paper')) : null, issueNumber: params.get('issue') ? parseInt(params.get('issue')) : null };
+}
+
+function showVerifyUI(issueNumber) {
+  const result = document.getElementById("result");
+  result.className = "success"; result.style.display = "block";
+  result.innerHTML = `Issue <a href="https://github.com/${REPO}/issues/${issueNumber}" target="_blank">#${issueNumber}</a> created. Enter your verification code:`
+    + `<div class="verify-section">`
+    + `<label>Verification code from email:</label>`
+    + `<input type="text" id="verify-code" placeholder="Enter code">`
+    + `<button class="verify-btn" onclick="doTeeVerify(${issueNumber})">Verify</button>`
+    + `<div id="verify-result" style="margin-top:8px"></div>`
+    + `</div>`;
 }
 
 function applyHash() {
-  const { tab, paperId } = readHash();
+  const { tab, paperId, issueNumber } = readHash();
   switchTab(tab);
-  if (tab === 'claim' && paperId && papers.length) selectPaper(paperId, true);
+  if (tab === 'claim' && paperId && papers.length) {
+    selectPaper(paperId, true);
+    if (issueNumber) showVerifyUI(issueNumber);
+  }
 }
 
 document.querySelectorAll(".nav-btn[data-tab]").forEach(btn => {
