@@ -82,9 +82,11 @@ input:focus { outline: 2px solid #006600; }
 #result a { color: #006600; }
 .info { color: #666; font-size: 0.8em; margin-top: 6px; }
 .claim-options { margin-top: 10px; }
-.claim-btn { display: block; width: 100%; margin: 8px 0; padding: 10px 16px; background: linear-gradient(180deg, #6ab85a 0%, #4a9c3f 40%, #357a28 100%);
-  color: #fff; border: 2px outset #4a9040; font-family: "Book Antiqua", serif; font-size: 0.9em; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); text-align: center; }
-.claim-btn:hover { background: linear-gradient(180deg, #7ac86a 0%, #5aac4f 40%, #458a38 100%); }
+.claim-btn { display: block; width: 100%; margin: 8px 0; padding: 12px 16px; background: #f5eedd; color: #654321;
+  border: 2px ridge #a08060; font-family: "Book Antiqua", serif; font-size: 0.95em; cursor: pointer; font-weight: bold; text-align: center; }
+.claim-btn:hover { background: #efe5cc; }
+.claim-btn.primary { background: #654321; color: #f5eedd; border-color: #4a2f15; }
+.claim-btn.primary:hover { background: #7a5535; }
 .claim-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .claim-divider { text-align: center; color: #999; font-size: 0.85em; margin: 6px 0; }
 .verify-section { margin-top: 12px; padding: 12px; background: #f5eedd; border: 2px ridge #a08060; }
@@ -146,7 +148,6 @@ input:focus { outline: 2px solid #006600; }
 
 <div id="claim" class="section">
   <p style="color:#555; margin-bottom:14px"><strong>1.</strong> Select a paper and enter your email below. <strong>2.</strong> Open the GitHub issue. <strong>3.</strong> Check your email and click the one-click verify link. That's it!</p>
-  <p style="color:#888; font-size:0.85em; margin-bottom:14px">No GitHub account? Use our TEE-based relayer — no sign-in needed.</p>
   <div id="claim-papers"></div>
   <div id="claim-form">
     <h2 id="selected-title"></h2>
@@ -157,7 +158,6 @@ input:focus { outline: 2px solid #006600; }
     <input type="text" id="recipient" placeholder="0x..." pattern="0x[a-fA-F0-9]{40}">
     <p class="info">The address that will receive the NFT on Base Sepolia.</p>
     <button id="check-btn" onclick="checkAndGenerate()">Check Eligibility</button>
-    <p style="color:#888; font-size:0.85em; margin-top:10px">No GitHub account? Use "Claim using our relayer" after checking eligibility.</p>
     <div id="result"></div>
   </div>
 </div>
@@ -467,7 +467,7 @@ async function checkAndGenerate() {
   result.className = "success"; result.style.display = "block";
   let html = `Email matches! Choose how to claim:<div class="claim-options">`;
   if (teeAvailable) {
-    html += `<button class="claim-btn" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim using our relayer</button>`;
+    html += `<button class="claim-btn primary" onclick="doTeeClaim(${selectedPaper.id}, '${hash}', '${recipient}')">Claim using our relayer</button>`;
     html += `<div class="claim-divider">&mdash; or &mdash;</div>`;
   }
   html += `<a href="${ghUrl}" target="_blank" class="claim-btn" style="display:block; text-decoration:none; text-align:center;">Claim using your own GitHub account &rarr;</a>`;
