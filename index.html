@@ -303,7 +303,7 @@ const BLOCKSCOUT = "https://base-sepolia.blockscout.com";
 const TEE_BASE = "https://b50173318c7332d2a7e63e66770d11b2b6e67043-3737.dstack-pha-prod7.phala.network";
 const TEE_PERMIT_ID = "permit_214d27659c6a5889";
 const TEE_BEARER = "8407aba0a0b31f93953db79db8f8dbe75c8cc421508148c8962fbc3396a982de6ffad6b5c6098d0ba5631414f8aa81b60202f5a67b37e7d7d48c4febf0704bbf";
-let teeAvailable = false;
+let teeAvailable = true;
 let papers = [], claimsByPaper = {}, selectedPaper = null, emailHints = {};
 
 async function sha256hex(str) {
@@ -570,7 +570,6 @@ window.addEventListener("hashchange", applyHash);
 load().then(() => {
   if (location.hash) applyHash();
 });
-fetch(TEE_BASE + "/health").then(r => { teeAvailable = r.ok; }).catch(() => {});
 </script>
 </body>
 </html>
