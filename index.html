@@ -490,7 +490,7 @@ async function teeVerify(issueNumber, code) {
   const r = await fetch(TEE_BASE + "/invoke/" + TEE_PERMIT_ID, {
     method: "POST",
     headers: { "Authorization": "Bearer " + TEE_BEARER, "Content-Type": "application/json" },
-    body: JSON.stringify({ capability: "verify", args: [String(issueNumber), code] })
+    body: JSON.stringify({ capability: "verify", args: [Number(issueNumber), code] })
   });
   const d = await r.json();
   if (d.error) throw new Error(d.error);
