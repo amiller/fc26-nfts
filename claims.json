@@ -23,15 +23,33 @@
       "tokenId": "0xd24313016f47f9308045c04421b98f3732692f28f5cc62226bc8302616b3465b",
       "txHash": "0x25995852cdb098a864519b1d0b8580e3ec0d5aa484a284f5f0eab468d1dc8410",
       "timestamp": "2026-03-03T22:40:18.000Z"
+    },
+    {
+      "paperId": 179,
+      "recipient": "0x74096d4b196c790f6fded61c327b333da8277b23",
+      "emailHash": "0x0e4dd7bba6ec0df1ccc1443d1eb536adfc2c2c6fa4a1af8ec8d86f1cf4ee79f0",
+      "tokenId": "0x0167369a1d9c9c4a08f1147ae58a403176583e373c5283532cf9303e6dbec098",
+      "txHash": "0x8b561a3658c686a8aec6ef4d4094db7f64d86bf50f968f39027126ee3dfc944b",
+      "timestamp": "2026-03-04T02:58:18.000Z"
+    },
+    {
+      "paperId": 209,
+      "recipient": "0x0a85ab80ae3a3e2dc12cc0626beb90db5c63bd7b",
+      "emailHash": "0x19ca257d79a5bfc4d4a11c86d683f3b6bfa109886234b7e65284a0ea7f54d32b",
+      "tokenId": "0x5752987803b1c49e82564d0ba9689cf3661a20f04d330c32a6890b8d2db4c105",
+      "txHash": "0x2528b5015fa43f6d49e74a3a04255f3961461d6de186e441d21631e2cf55cedc",
+      "timestamp": "2026-03-04T03:05:38.000Z"
     }
   ],
   "claimedPaperIds": [
     14,
     231,
-    216
+    216,
+    179,
+    209
   ],
   "stats": {
-    "totalClaims": 3
+    "totalClaims": 5
   },
-  "updatedAt": "2026-03-04T00:30:08.923Z"
+  "updatedAt": "2026-03-04T06:18:29.737Z"
 }
