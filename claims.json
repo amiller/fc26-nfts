@@ -39,6 +39,14 @@
       "tokenId": "0x5752987803b1c49e82564d0ba9689cf3661a20f04d330c32a6890b8d2db4c105",
       "txHash": "0x2528b5015fa43f6d49e74a3a04255f3961461d6de186e441d21631e2cf55cedc",
       "timestamp": "2026-03-04T03:05:38.000Z"
+    },
+    {
+      "paperId": 179,
+      "recipient": "0x4f294dc7460367146d39248a678c5c42d016d8be",
+      "emailHash": "0x44b2322229ab7ee962062d840edefa5de19751066899f9de57daeb549a7e97e3",
+      "tokenId": "0x553d5dc9412de4e0fd29b6c9710d3001d0c132f9d98672b9b3a487d3cc5188bf",
+      "txHash": "0x46c9754d989a5b6d3fda949ab926aab553e59a32afbf0c9498e2a5a5035baa5c",
+      "timestamp": "2026-03-20T15:27:30.000Z"
     }
   ],
   "claimedPaperIds": [
@@ -49,7 +57,7 @@
     209
   ],
   "stats": {
-    "totalClaims": 5
+    "totalClaims": 6
   },
-  "updatedAt": "2026-03-20T12:15:02.964Z"
+  "updatedAt": "2026-03-20T18:16:16.343Z"
 }
